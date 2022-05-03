@@ -1,0 +1,408 @@
+Component: ARM Compiler 6.16 Tool: armlink [5dfeaa00]
+
+==============================================================================
+
+Section Cross References
+
+    pit.o(.text) refers to pit.o(.bss.timer_flag) for timer_flag
+    pit.o(.ARM.exidx) refers to pit.o(.text) for [Anonymous Symbol]
+    queue.o(.text) refers to memseta.o(.text) for __aeabi_memclr
+    queue.o(.ARM.exidx) refers to queue.o(.text) for [Anonymous Symbol]
+    rgb.o(.ARM.exidx) refers to rgb.o(.text) for [Anonymous Symbol]
+    main.o(.text) refers to main.o(.bss.res) for res
+    main.o(.ARM.exidx) refers to main.o(.text) for [Anonymous Symbol]
+    tpm1.o(.ARM.exidx) refers to tpm1.o(.text) for [Anonymous Symbol]
+    uart0.o(.text) refers to queue.o(.text) for q_init
+    uart0.o(.text) refers to uart0.o(.bss.TxQ) for [Anonymous Symbol]
+    uart0.o(.text) refers to uart0.o(.bss.RxQ) for [Anonymous Symbol]
+    uart0.o(.ARM.exidx) refers to uart0.o(.text) for [Anonymous Symbol]
+    startup_mkl25z4.o(RESET) refers to startup_mkl25z4.o(STACK) for __initial_sp
+    startup_mkl25z4.o(RESET) refers to startup_mkl25z4.o(.text) for Reset_Handler
+    startup_mkl25z4.o(RESET) refers to uart0.o(.text) for UART0_IRQHandler
+    startup_mkl25z4.o(RESET) refers to pit.o(.text) for PIT_IRQHandler
+    startup_mkl25z4.o(.text) refers to system_mkl25z4.o(.text) for SystemInit
+    startup_mkl25z4.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    system_mkl25z4.o(.text) refers to uidiv_div0.o(.text) for __aeabi_uidiv
+    system_mkl25z4.o(.text) refers to system_mkl25z4.o(.data.SystemCoreClock) for SystemCoreClock
+    system_mkl25z4.o(.ARM.exidx) refers to system_mkl25z4.o(.text) for [Anonymous Symbol]
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_mkl25z4.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_mkl25z4.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(.text) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(.text) for main
+    idiv_div0.o(.text) refers to uidiv_div0.o(.text) for __aeabi_uidivmod
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing pit.o(.ARM.exidx), (16 bytes).
+    Removing queue.o(.ARM.exidx), (48 bytes).
+    Removing rgb.o(.text), (172 bytes).
+    Removing rgb.o(.ARM.exidx), (24 bytes).
+    Removing main.o(.ARM.exidx), (16 bytes).
+    Removing main.o(.bss.counter), (4 bytes).
+    Removing main.o(.ARM.use_no_argv), (4 bytes).
+    Removing tpm1.o(.text), (2 bytes).
+    Removing tpm1.o(.ARM.exidx), (8 bytes).
+    Removing uart0.o(.ARM.exidx), (48 bytes).
+    Removing startup_mkl25z4.o(HEAP), (0 bytes).
+    Removing system_mkl25z4.o(.ARM.exidx), (16 bytes).
+
+12 unused section(s) (total 358 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdivfast.o ABSOLUTE
+    ../clib/division.s                       0x00000000   Number         0  aeabi_sdivfast_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  uidiv_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv_div0.o ABSOLUTE
+    ../clib/microlib/division.c              0x00000000   Number         0  idiv0.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry2.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry5.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry7b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry8b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry9b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry10b.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11a.o ABSOLUTE
+    ../clib/microlib/init/entry.s            0x00000000   Number         0  entry11b.o ABSOLUTE
+    ../clib/microlib/string/memset.c         0x00000000   Number         0  memseta.o ABSOLUTE
+    RTE/Device/MKL25Z128xxx4/startup_MKL25Z4.s 0x00000000   Number         0  startup_mkl25z4.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    handlers.s                               0x00000000   Number         0  handlers.o ABSOLUTE
+    init.s                                   0x00000000   Number         0  init.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    pit.c                                    0x00000000   Number         0  pit.o ABSOLUTE
+    queue.c                                  0x00000000   Number         0  queue.o ABSOLUTE
+    rgb.c                                    0x00000000   Number         0  rgb.o ABSOLUTE
+    system_MKL25Z4.c                         0x00000000   Number         0  system_mkl25z4.o ABSOLUTE
+    tpm1.c                                   0x00000000   Number         0  tpm1.o ABSOLUTE
+    uart0.c                                  0x00000000   Number         0  uart0.o ABSOLUTE
+    RESET                                    0x00000000   Section      192  startup_mkl25z4.o(RESET)
+    .ARM.Collect$$$$00000000                 0x000000c0   Section        0  entry.o(.ARM.Collect$$$$00000000)
+    .ARM.Collect$$$$00000001                 0x000000c0   Section        4  entry2.o(.ARM.Collect$$$$00000001)
+    .ARM.Collect$$$$00000004                 0x000000c4   Section        4  entry5.o(.ARM.Collect$$$$00000004)
+    .ARM.Collect$$$$00000008                 0x000000c8   Section        0  entry7b.o(.ARM.Collect$$$$00000008)
+    .ARM.Collect$$$$0000000A                 0x000000c8   Section        0  entry8b.o(.ARM.Collect$$$$0000000A)
+    .ARM.Collect$$$$0000000B                 0x000000c8   Section        8  entry9a.o(.ARM.Collect$$$$0000000B)
+    __lit__00000000                          0x000000d0   Data           4  entry2.o(.ARM.Collect$$$$00002712)
+    .ARM.Collect$$$$0000000D                 0x000000d0   Section        0  entry10a.o(.ARM.Collect$$$$0000000D)
+    .ARM.Collect$$$$0000000F                 0x000000d0   Section        0  entry11a.o(.ARM.Collect$$$$0000000F)
+    .ARM.Collect$$$$00002712                 0x000000d0   Section        4  entry2.o(.ARM.Collect$$$$00002712)
+    [Anonymous Symbol]                       0x000000d4   Section        0  pit.o(.text)
+    __arm_cp.0_0                             0x00000104   Number         4  pit.o(.text)
+    __arm_cp.0_1                             0x00000108   Number         4  pit.o(.text)
+    __arm_cp.0_2                             0x0000010c   Number         4  pit.o(.text)
+    __arm_cp.0_3                             0x00000110   Number         4  pit.o(.text)
+    __arm_cp.0_4                             0x00000114   Number         4  pit.o(.text)
+    __arm_cp.0_5                             0x00000118   Number         4  pit.o(.text)
+    __arm_cp.1_0                             0x00000124   Number         4  pit.o(.text)
+    [Anonymous Symbol]                       0x00000128   Section        0  queue.o(.text)
+    __arm_cp.2_0                             0x00000150   Number         4  queue.o(.text)
+    __arm_cp.4_0                             0x000001a0   Number         4  queue.o(.text)
+    __arm_cp.5_0                             0x000001e8   Number         4  queue.o(.text)
+    [Anonymous Symbol]                       0x000001ec   Section        0  main.o(.text)
+    __arm_cp.0_0                             0x00000208   Number         4  main.o(.text)
+    __arm_cp.0_1                             0x0000020c   Number         4  main.o(.text)
+    __arm_cp.1_0                             0x0000023c   Number         4  main.o(.text)
+    __arm_cp.1_1                             0x00000240   Number         4  main.o(.text)
+    __arm_cp.1_2                             0x00000244   Number         4  main.o(.text)
+    .text                                    0x00000248   Section       40  startup_mkl25z4.o(.text)
+    .text                                    0x00000270   Section        0  memseta.o(.text)
+    .text                                    0x00000294   Section        0  uidiv_div0.o(.text)
+    .text                                    0x000002d4   Section       36  init.o(.text)
+    i.__scatterload_copy                     0x000002f8   Section       14  handlers.o(i.__scatterload_copy)
+    i.__scatterload_null                     0x00000306   Section        2  handlers.o(i.__scatterload_null)
+    i.__scatterload_zeroinit                 0x00000308   Section       14  handlers.o(i.__scatterload_zeroinit)
+    .ARM.__at_0x400                          0x00000400   Section       16  startup_mkl25z4.o(.ARM.__at_0x400)
+    [Anonymous Symbol]                       0x00000410   Section        0  uart0.o(.text)
+    __arm_cp.0_0                             0x0000048c   Number         4  uart0.o(.text)
+    __arm_cp.0_1                             0x00000490   Number         4  uart0.o(.text)
+    __arm_cp.0_2                             0x00000494   Number         4  uart0.o(.text)
+    __arm_cp.0_3                             0x00000498   Number         4  uart0.o(.text)
+    __arm_cp.0_4                             0x0000049c   Number         4  uart0.o(.text)
+    __arm_cp.0_5                             0x000004a0   Number         4  uart0.o(.text)
+    __arm_cp.0_6                             0x000004a4   Number         4  uart0.o(.text)
+    __arm_cp.0_7                             0x000004a8   Number         4  uart0.o(.text)
+    __arm_cp.0_8                             0x000004ac   Number         4  uart0.o(.text)
+    __arm_cp.1_0                             0x0000050c   Number         4  uart0.o(.text)
+    __arm_cp.1_1                             0x00000510   Number         4  uart0.o(.text)
+    __arm_cp.1_2                             0x00000514   Number         4  uart0.o(.text)
+    __arm_cp.1_3                             0x00000518   Number         4  uart0.o(.text)
+    __arm_cp.2_0                             0x00000560   Number         4  uart0.o(.text)
+    __arm_cp.2_1                             0x00000564   Number         4  uart0.o(.text)
+    __arm_cp.3_0                             0x00000574   Number         4  uart0.o(.text)
+    __arm_cp.4_0                             0x00000598   Number         4  uart0.o(.text)
+    __arm_cp.5_0                             0x000005c4   Number         4  uart0.o(.text)
+    __arm_cp.5_1                             0x000005c8   Number         4  uart0.o(.text)
+    [Anonymous Symbol]                       0x000005cc   Section        0  system_mkl25z4.o(.text)
+    __arm_cp.0_0                             0x00000688   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_1                             0x0000068c   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_2                             0x00000690   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_3                             0x00000694   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_4                             0x00000698   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_5                             0x0000069c   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_6                             0x000006a0   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_7                             0x000006a4   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_8                             0x000006a8   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_9                             0x000006ac   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.0_10                            0x000006b0   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_0                             0x000007a8   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_1                             0x000007ac   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_2                             0x000007b0   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_3                             0x000007b4   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_4                             0x000007b8   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_5                             0x000007bc   Number         4  system_mkl25z4.o(.text)
+    __arm_cp.1_6                             0x000007c0   Number         4  system_mkl25z4.o(.text)
+    RxQ                                      0x1ffff008   Data         524  uart0.o(.bss.RxQ)
+    [Anonymous Symbol]                       0x1ffff008   Section        0  uart0.o(.bss.RxQ)
+    TxQ                                      0x1ffff214   Data         524  uart0.o(.bss.TxQ)
+    [Anonymous Symbol]                       0x1ffff214   Section        0  uart0.o(.bss.TxQ)
+    STACK                                    0x1ffff428   Section     1024  startup_mkl25z4.o(STACK)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv3M$S$PE$A:L22$X:L11$S22$IEEE1$IW$~IW$USESV6$~STKCKD$USESV7$~SHL$OTIME$EBA8$MICROLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __Vectors                                0x00000000   Data           4  startup_mkl25z4.o(RESET)
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __decompress                              - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _microlib_exit                            - Undefined Weak Reference
+    __Vectors_End                            0x000000c0   Data           0  startup_mkl25z4.o(RESET)
+    __Vectors_Size                           0x000000c0   Number         0  startup_mkl25z4.o ABSOLUTE
+    __main                                   0x000000c1   Thumb Code     0  entry.o(.ARM.Collect$$$$00000000)
+    _main_stk                                0x000000c1   Thumb Code     0  entry2.o(.ARM.Collect$$$$00000001)
+    _main_scatterload                        0x000000c5   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    __main_after_scatterload                 0x000000c9   Thumb Code     0  entry5.o(.ARM.Collect$$$$00000004)
+    _main_clock                              0x000000c9   Thumb Code     0  entry7b.o(.ARM.Collect$$$$00000008)
+    _main_cpp_init                           0x000000c9   Thumb Code     0  entry8b.o(.ARM.Collect$$$$0000000A)
+    _main_init                               0x000000c9   Thumb Code     0  entry9a.o(.ARM.Collect$$$$0000000B)
+    __rt_final_cpp                           0x000000d1   Thumb Code     0  entry10a.o(.ARM.Collect$$$$0000000D)
+    __rt_final_exit                          0x000000d1   Thumb Code     0  entry11a.o(.ARM.Collect$$$$0000000F)
+    pit_init                                 0x000000d5   Thumb Code    48  pit.o(.text)
+    PIT_IRQHandler                           0x0000011d   Thumb Code     8  pit.o(.text)
+    q_init                                   0x00000129   Thumb Code    12  queue.o(.text)
+    q_empty                                  0x00000135   Thumb Code    12  queue.o(.text)
+    q_full                                   0x00000141   Thumb Code    16  queue.o(.text)
+    q_size                                   0x00000155   Thumb Code     8  queue.o(.text)
+    q_enqueue                                0x0000015d   Thumb Code    68  queue.o(.text)
+    q_dequeue                                0x000001a5   Thumb Code    68  queue.o(.text)
+    init_DAC                                 0x000001ed   Thumb Code    28  main.o(.text)
+    main                                     0x00000211   Thumb Code    44  main.o(.text)
+    Reset_Handler                            0x00000249   Thumb Code    12  startup_mkl25z4.o(.text)
+    NMI_Handler                              0x00000255   Thumb Code     2  startup_mkl25z4.o(.text)
+    HardFault_Handler                        0x00000257   Thumb Code     2  startup_mkl25z4.o(.text)
+    SVC_Handler                              0x00000259   Thumb Code     2  startup_mkl25z4.o(.text)
+    PendSV_Handler                           0x0000025b   Thumb Code     2  startup_mkl25z4.o(.text)
+    SysTick_Handler                          0x0000025d   Thumb Code     2  startup_mkl25z4.o(.text)
+    ADC0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    CMP0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DAC0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DMA0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DMA1_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DMA2_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DMA3_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    DefaultISR                               0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    FTFA_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    I2C0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    I2C1_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    LLWU_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    LPTMR0_IRQHandler                        0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    LVD_LVW_IRQHandler                       0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    MCG_IRQHandler                           0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    PORTA_IRQHandler                         0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    PORTD_IRQHandler                         0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    RTC_IRQHandler                           0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    RTC_Seconds_IRQHandler                   0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    Reserved20_IRQHandler                    0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    Reserved39_IRQHandler                    0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    Reserved45_IRQHandler                    0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    SPI0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    SPI1_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    TPM0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    TPM1_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    TPM2_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    TSI0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    UART1_IRQHandler                         0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    UART2_IRQHandler                         0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    USB0_IRQHandler                          0x0000025f   Thumb Code     0  startup_mkl25z4.o(.text)
+    __aeabi_memset                           0x00000271   Thumb Code    14  memseta.o(.text)
+    __aeabi_memset4                          0x00000271   Thumb Code     0  memseta.o(.text)
+    __aeabi_memset8                          0x00000271   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr                           0x0000027f   Thumb Code     4  memseta.o(.text)
+    __aeabi_memclr4                          0x0000027f   Thumb Code     0  memseta.o(.text)
+    __aeabi_memclr8                          0x0000027f   Thumb Code     0  memseta.o(.text)
+    _memset$wrapper                          0x00000283   Thumb Code    18  memseta.o(.text)
+    __aeabi_uidiv                            0x00000295   Thumb Code     0  uidiv_div0.o(.text)
+    __aeabi_uidivmod                         0x00000295   Thumb Code    62  uidiv_div0.o(.text)
+    __scatterload                            0x000002d5   Thumb Code    28  init.o(.text)
+    __scatterload_rt2                        0x000002d5   Thumb Code     0  init.o(.text)
+    __scatterload_copy                       0x000002f9   Thumb Code    14  handlers.o(i.__scatterload_copy)
+    __scatterload_null                       0x00000307   Thumb Code     2  handlers.o(i.__scatterload_null)
+    __scatterload_zeroinit                   0x00000309   Thumb Code    14  handlers.o(i.__scatterload_zeroinit)
+    Region$$Table$$Base                      0x00000318   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00000338   Number         0  anon$$obj.o(Region$$Table)
+    uart0_init                               0x00000411   Thumb Code   124  uart0.o(.text)
+    UART0_IRQHandler                         0x000004b1   Thumb Code    92  uart0.o(.text)
+    uart0_send_string                        0x0000051d   Thumb Code    68  uart0.o(.text)
+    uart0_num_rx_chars_available             0x00000569   Thumb Code    12  uart0.o(.text)
+    uart0_get_char                           0x00000579   Thumb Code    32  uart0.o(.text)
+    uart0_put_char                           0x0000059d   Thumb Code    40  uart0.o(.text)
+    SystemInit                               0x000005cd   Thumb Code   188  system_mkl25z4.o(.text)
+    SystemCoreClockUpdate                    0x000006b5   Thumb Code   244  system_mkl25z4.o(.text)
+    SystemCoreClock                          0x1ffff000   Data           4  system_mkl25z4.o(.data.SystemCoreClock)
+    res                                      0x1ffff420   Data           4  main.o(.bss.res)
+    timer_flag                               0x1ffff424   Data           1  pit.o(.bss.timer_flag)
+    __initial_sp                             0x1ffff828   Data           0  startup_mkl25z4.o(STACK)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x000000c1
+
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x000007d0, Max: 0x00020000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x000007c4, Max: 0x00020000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x000000c0   Data   RO           55    RESET               startup_mkl25z4.o
+    0x000000c0   0x000000c0   0x00000000   Code   RO           74  * .ARM.Collect$$$$00000000  mc_p.l(entry.o)
+    0x000000c0   0x000000c0   0x00000004   Code   RO           85    .ARM.Collect$$$$00000001  mc_p.l(entry2.o)
+    0x000000c4   0x000000c4   0x00000004   Code   RO           88    .ARM.Collect$$$$00000004  mc_p.l(entry5.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO           90    .ARM.Collect$$$$00000008  mc_p.l(entry7b.o)
+    0x000000c8   0x000000c8   0x00000000   Code   RO           92    .ARM.Collect$$$$0000000A  mc_p.l(entry8b.o)
+    0x000000c8   0x000000c8   0x00000008   Code   RO           93    .ARM.Collect$$$$0000000B  mc_p.l(entry9a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO           95    .ARM.Collect$$$$0000000D  mc_p.l(entry10a.o)
+    0x000000d0   0x000000d0   0x00000000   Code   RO           97    .ARM.Collect$$$$0000000F  mc_p.l(entry11a.o)
+    0x000000d0   0x000000d0   0x00000004   Code   RO           86    .ARM.Collect$$$$00002712  mc_p.l(entry2.o)
+    0x000000d4   0x000000d4   0x00000054   Code   RO            1    .text               pit.o
+    0x00000128   0x00000128   0x000000c4   Code   RO            9    .text               queue.o
+    0x000001ec   0x000001ec   0x0000005c   Code   RO           26    .text               main.o
+    0x00000248   0x00000248   0x00000028   Code   RO           57    .text               startup_mkl25z4.o
+    0x00000270   0x00000270   0x00000024   Code   RO           83    .text               mc_p.l(memseta.o)
+    0x00000294   0x00000294   0x0000003e   Code   RO          103    .text               mc_p.l(uidiv_div0.o)
+    0x000002d2   0x000002d2   0x00000002   PAD
+    0x000002d4   0x000002d4   0x00000024   Code   RO          109    .text               mc_p.l(init.o)
+    0x000002f8   0x000002f8   0x0000000e   Code   RO          113    i.__scatterload_copy  mc_p.l(handlers.o)
+    0x00000306   0x00000306   0x00000002   Code   RO          114    i.__scatterload_null  mc_p.l(handlers.o)
+    0x00000308   0x00000308   0x0000000e   Code   RO          115    i.__scatterload_zeroinit  mc_p.l(handlers.o)
+    0x00000316   0x00000316   0x00000002   PAD
+    0x00000318   0x00000318   0x00000020   Data   RO          112    Region$$Table       anon$$obj.o
+    0x00000338   0x00000338   0x000000c8   PAD
+    0x00000400   0x00000400   0x00000010   Code   RO           56    .ARM.__at_0x400     startup_mkl25z4.o
+    0x00000410   0x00000410   0x000001bc   Code   RO           43    .text               uart0.o
+    0x000005cc   0x000005cc   0x000001f8   Code   RO           65    .text               system_mkl25z4.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x1ffff000, Load base: 0x000007c8, Size: 0x00000828, Max: 0x00004000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x1ffff000   0x000007c8   0x00000004   Data   RW           67    .data.SystemCoreClock  system_mkl25z4.o
+    0x1ffff004   0x000007cc   0x00000004   PAD
+    0x1ffff008        -       0x0000020c   Zero   RW           46    .bss.RxQ            uart0.o
+    0x1ffff214        -       0x0000020c   Zero   RW           45    .bss.TxQ            uart0.o
+    0x1ffff420        -       0x00000004   Zero   RW           29    .bss.res            main.o
+    0x1ffff424        -       0x00000001   Zero   RW            3    .bss.timer_flag     pit.o
+    0x1ffff425   0x000007cc   0x00000003   PAD
+    0x1ffff428        -       0x00000400   Zero   RW           53    STACK               startup_mkl25z4.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+        92         20          0          0          4       2204   main.o
+        84         28          0          0          1       3163   pit.o
+       196         12          0          0          0       2561   queue.o
+        56         30        192          0       1024        920   startup_mkl25z4.o
+       504         80          0          4          0       3204   system_mkl25z4.o
+       444         76          0          0       1048       4785   uart0.o
+
+    ----------------------------------------------------------------------
+      1376        246        424          4       2084      16837   Object Totals
+         0          0         32          0          0          0   (incl. Generated)
+         0          0        200          0          7          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         0          0          0          0          0          0   entry.o
+         0          0          0          0          0          0   entry10a.o
+         0          0          0          0          0          0   entry11a.o
+         8          4          0          0          0          0   entry2.o
+         4          0          0          0          0          0   entry5.o
+         0          0          0          0          0          0   entry7b.o
+         0          0          0          0          0          0   entry8b.o
+         8          4          0          0          0          0   entry9a.o
+        30          0          0          0          0          0   handlers.o
+        36          8          0          0          0         68   init.o
+        36          0          0          0          0        100   memseta.o
+        62          0          0          0          0         72   uidiv_div0.o
+
+    ----------------------------------------------------------------------
+       188         16          0          0          0        240   Library Totals
+         4          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       184         16          0          0          0        240   mc_p.l
+
+    ----------------------------------------------------------------------
+       188         16          0          0          0        240   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+      1564        262        424          4       2084      17149   Grand Totals
+      1564        262        424          4       2084      17149   ELF Image Totals
+      1564        262        424          4          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                 1988 (   1.94kB)
+    Total RW  Size (RW Data + ZI Data)              2088 (   2.04kB)
+    Total ROM Size (Code + RO Data + RW Data)       1992 (   1.95kB)
+
+==============================================================================
+
