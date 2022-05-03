@@ -27,5 +27,5 @@ Error Array
 
 void checkFlags()
 {
-	if ()
+ ;
 }
