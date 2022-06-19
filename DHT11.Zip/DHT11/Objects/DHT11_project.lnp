@@ -1,0 +1,12 @@
+--cpu Cortex-M0+
+".\objects\main.o"
+".\objects\tpm0.o"
+".\objects\dht11.o"
+".\objects\uart.o"
+".\objects\queue.o"
+".\objects\startup_mkl25z4.o"
+".\objects\system_mkl25z4.o"
+--library_type=microlib --strict --scatter ".\Objects\DHT11_project.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Listings\DHT11_project.map" -o .\Objects\DHT11_project.axf
