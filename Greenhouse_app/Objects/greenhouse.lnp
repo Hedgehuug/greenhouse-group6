@@ -1,7 +1,12 @@
 --cpu Cortex-M0+
 ".\objects\main.o"
 ".\objects\flags.o"
+".\objects\sensor.o"
+".\objects\dht11.o"
 ".\objects\lights.o"
+".\objects\tpm0.o"
+".\objects\uart.o"
+".\objects\queue.o"
 ".\objects\startup_mkl25z4.o"
 ".\objects\system_mkl25z4.o"
 --library_type=microlib --strict --scatter ".\Objects\greenhouse.sct"
