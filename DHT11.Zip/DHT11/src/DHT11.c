@@ -11,14 +11,14 @@ void checkResponse(unsigned int waitTimeUS, unsigned int margin, bool pinValue)
 	{
 		while( PTA->PDIR & MASK(1) )
 		{
-			if( TPM0->CNT > (maxwait)) break; 
+			if( TPM1->CNT > (maxwait)) break; 
 		}
 	}
 	else
 	{
 		while(!(PTA->PDIR & MASK(1)))
 		{
-			if(TPM0->CNT > (maxwait)) break; 
+			if(TPM1->CNT > (maxwait)) break; 
 		}
 	}
 	time = timerStop();
@@ -39,7 +39,7 @@ int getDataBit(void)
 	timerStart();
 	while( PTA->PDIR & MASK(1))
 	{
-		if( TPM0->CNT > 250)
+		if( TPM1->CNT > 250)
 		{
 			//printError("Data Error");
 			temp = 2; //2 = Error (Timeout for 50us LOW)

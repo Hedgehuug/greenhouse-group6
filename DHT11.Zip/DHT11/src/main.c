@@ -34,7 +34,7 @@ int main(void)
 	
 	while(1)
 	{
-		delay_us(1000000);
+		delay_us(2000000);
 		
     PORTA->PCR[1] = 256;
 	

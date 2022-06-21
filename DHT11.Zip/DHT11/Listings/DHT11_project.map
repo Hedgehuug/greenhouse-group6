@@ -706,16 +706,16 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
 
-       192         24         23          0          0       2083   dht11.o
-      1252         80          0          0        167       4744   main.o
-       196         12          0          0          0       2559   queue.o
+       192         24         23          0          0       2067   dht11.o
+      1252         80          0          0        167       4728   main.o
+       196         12          0          0          0       2543   queue.o
         56         30        192          0        512        920   startup_mkl25z4.o
-       504         80          0          4          0       3214   system_mkl25z4.o
-        84         20          0          0          0       1868   tpm0.o
-       444         76          0          0       1048       4790   uart.o
+       504         80          0          4          0       3198   system_mkl25z4.o
+        84         20          0          0          0       1852   tpm0.o
+       444         76          0          0       1048       4767   uart.o
 
     ----------------------------------------------------------------------
-      2728        322        250          4       1732      20178   Object Totals
+      2728        322        250          4       1732      20075   Object Totals
          0          0         32          0          0          0   (incl. Generated)
          0          0          3          0          5          0   (incl. Padding)
 
@@ -757,8 +757,8 @@ Image component sizes
 
       Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
 
-      3302        346        250          4       1732      20566   Grand Totals
-      3302        346        250          4       1732      20566   ELF Image Totals
+      3302        346        250          4       1732      20463   Grand Totals
+      3302        346        250          4       1732      20463   ELF Image Totals
       3302        346        250          4          0          0   ROM Totals
 
 ==============================================================================
