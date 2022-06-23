@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Demo</class>
+ <widget class="QMainWindow" name="Demo">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>212</width>
+    <height>362</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Demo</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="pbConnect">
+      <property name="text">
+       <string>&amp;Connect</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QLineEdit" name="lePortName">
+      <property name="text">
+       <string>COM6</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="title">
+       <string>To FRDM-KL25Z</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QCheckBox" name="cbRed">
+         <property name="text">
+          <string>Red</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cbGreen">
+         <property name="text">
+          <string>Green</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QCheckBox" name="cbBlue">
+         <property name="text">
+          <string>Blue</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="title">
+       <string>From FRDM-KL25Z</string>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_3">
+       <item>
+        <widget class="QLineEdit" name="info">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pushButton">
+      <property name="text">
+       <string>E&amp;xit</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>212</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections>
+  <connection>
+   <sender>cbRed</sender>
+   <signal>clicked()</signal>
+   <receiver>Demo</receiver>
+   <slot>rgbUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>190</x>
+     <y>125</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>72</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbGreen</sender>
+   <signal>clicked()</signal>
+   <receiver>Demo</receiver>
+   <slot>rgbUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>82</x>
+     <y>132</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>102</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>cbBlue</sender>
+   <signal>clicked()</signal>
+   <receiver>Demo</receiver>
+   <slot>rgbUpdate()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>174</x>
+     <y>158</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>129</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pbConnect</sender>
+   <signal>clicked()</signal>
+   <receiver>Demo</receiver>
+   <slot>serialConnect()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>194</x>
+     <y>79</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>209</x>
+     <y>41</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>pushButton</sender>
+   <signal>clicked()</signal>
+   <receiver>Demo</receiver>
+   <slot>exit()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>183</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>208</x>
+     <y>261</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
+ <slots>
+  <slot>rgbUpdate()</slot>
+  <slot>serialConnect()</slot>
+  <slot>exit()</slot>
+ </slots>
+</ui>
