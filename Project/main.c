@@ -3,19 +3,21 @@
 
 #include "LEDP.h"
 
-uint16_t color = 1024;
-uint16_t water = 1024;
-uint16_t fan = 1024;
+uint16_t color = 32700;
+uint16_t heat = 32700;
+uint16_t fan = 32700;
 
 int main(void)
 {
 	tpm_init();
 	
-  color_onoff(true);
+	color_onoff(false);
 	
-	water_onoff(true);
+	heat_onoff(false);
 	
-	fan_onoff(true);
+	fan_onoff(false);
 	
+	while(1)
+	{;}
   return 0;
 }
