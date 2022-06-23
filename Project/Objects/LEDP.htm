@@ -3,7 +3,7 @@
 <title>Static Call Graph - [.\Objects\LEDP.axf]</title></head>
 <body><HR>
 <H1>Static Call Graph for image .\Objects\LEDP.axf</H1><HR>
-<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Tue Jun  7 15:47:30 2022
+<BR><P>#&#060CALLGRAPH&#062# ARM Linker, 6160001: Last Updated: Wed Jun 22 17:47:24 2022
 <BR><P>
 <H3>Maximum Stack Usage =         16 bytes + Unknown(Functions without stacksize, Cycles, Untraceable Function Pointers)</H3><H3>
 Call chain for Maximum Stack Depth:</H3>
@@ -185,8 +185,8 @@ Global Symbols
 <P><STRONG><a name="[62]"></a>__rt_entry_postsh_1</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$00000009))
 
 <P><STRONG><a name="[31]"></a>__rt_entry_main</STRONG> (Thumb, 0 bytes, Stack size unknown bytes, __rtentry2.o(.ARM.Collect$$rtentry$$0000000D))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16 + Unknown Stack Size
-<LI>Call Chain = __rt_entry_main &rArr; main &rArr; tpm_init
+<BR><BR>[Stack]<UL><LI>Max Depth = 8 + Unknown Stack Size
+<LI>Call Chain = __rt_entry_main &rArr; exit
 </UL>
 <BR>[Calls]<UL><LI><a href="#[33]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;exit
 <LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
@@ -208,35 +208,31 @@ Global Symbols
 <BR><BR>[Calls]<UL><LI><a href="#[37]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;_sys_exit
 </UL>
 
-<P><STRONG><a name="[38]"></a>tpm_init</STRONG> (Thumb, 80 bytes, Stack size 8 bytes, ledp.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 8<LI>Call Chain = tpm_init
-</UL>
-<BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
+<P><STRONG><a name="[38]"></a>tpm_init</STRONG> (Thumb, 100 bytes, Stack size 0 bytes, ledp.o(.text))
+<BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[65]"></a>color_pwmcontrol</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ledp.o(.text), UNUSED)
 
-<P><STRONG><a name="[39]"></a>color_onoff</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, ledp.o(.text))
+<P><STRONG><a name="[39]"></a>color_onoff</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ledp.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[66]"></a>water_pwmcontrol</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ledp.o(.text), UNUSED)
+<P><STRONG><a name="[66]"></a>heat_pwmcontrol</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ledp.o(.text), UNUSED)
 
-<P><STRONG><a name="[3a]"></a>water_onoff</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, ledp.o(.text))
+<P><STRONG><a name="[3a]"></a>heat_onoff</STRONG> (Thumb, 24 bytes, Stack size 0 bytes, ledp.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
 <P><STRONG><a name="[67]"></a>fan_pwmcontrol</STRONG> (Thumb, 8 bytes, Stack size 0 bytes, ledp.o(.text), UNUSED)
 
-<P><STRONG><a name="[3b]"></a>fan_onoff</STRONG> (Thumb, 20 bytes, Stack size 0 bytes, ledp.o(.text))
+<P><STRONG><a name="[3b]"></a>fan_onoff</STRONG> (Thumb, 16 bytes, Stack size 0 bytes, ledp.o(.text))
 <BR><BR>[Called By]<UL><LI><a href="#[32]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;main
 </UL>
 
-<P><STRONG><a name="[32]"></a>main</STRONG> (Thumb, 30 bytes, Stack size 8 bytes, main.o(.text))
-<BR><BR>[Stack]<UL><LI>Max Depth = 16<LI>Call Chain = main &rArr; tpm_init
-</UL>
-<BR>[Calls]<UL><LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;water_onoff
-<LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tpm_init
+<P><STRONG><a name="[32]"></a>main</STRONG> (Thumb, 26 bytes, Stack size 0 bytes, main.o(.text))
+<BR><BR>[Calls]<UL><LI><a href="#[38]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;tpm_init
+<LI><a href="#[3a]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;heat_onoff
 <LI><a href="#[3b]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;fan_onoff
 <LI><a href="#[39]">&gt;&gt;</a>&nbsp;&nbsp;&nbsp;color_onoff
 </UL>
