@@ -35,6 +35,7 @@
  *----------------------------------------------------------------------------*/
 int main (void)
 {
+		
     rgb_init();
     uart0_init();
     pit_init(BUS_CLOCK_FREQUENCY/TICK_FREQUENCY);

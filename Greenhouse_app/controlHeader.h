@@ -11,4 +11,5 @@
 #include "tpm1/TPM0.h"
 #include "uart0/uart.h"
 #include "queue/queue.h"
+#include "uart1/uart1.h"
 

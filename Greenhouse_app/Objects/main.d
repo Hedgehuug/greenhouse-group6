@@ -12,4 +12,5 @@
   SoilM\sensor.h \
   C:\Users\hedge\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h \
   Temp\DHT11.h Temp\..\tpm1\TPM0.h Temp\..\uart0\uart.h \
-  Temp\..\uart0\..\queue\queue.h tpm1\TPM0.h uart0\uart.h queue\queue.h
+  Temp\..\uart0\..\queue\queue.h tpm1\TPM0.h uart0\uart.h queue\queue.h \
+  uart1\uart1.h uart1\..\queue\queue.h

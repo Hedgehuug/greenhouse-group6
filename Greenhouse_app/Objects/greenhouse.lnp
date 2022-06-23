@@ -7,6 +7,7 @@
 ".\objects\tpm0.o"
 ".\objects\uart.o"
 ".\objects\queue.o"
+".\objects\uart1.o"
 ".\objects\startup_mkl25z4.o"
 ".\objects\system_mkl25z4.o"
 --library_type=microlib --strict --scatter ".\Objects\greenhouse.sct"

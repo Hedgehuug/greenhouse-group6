@@ -501,6 +501,21 @@
           </Files>
         </Group>
         <Group>
+          <GroupName>uart1</GroupName>
+          <Files>
+            <File>
+              <FileName>uart1.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\uart1\uart1.c</FilePath>
+            </File>
+            <File>
+              <FileName>uart1.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\uart1\uart1.h</FilePath>
+            </File>
+          </Files>
+        </Group>
+        <Group>
           <GroupName>::CMSIS</GroupName>
         </Group>
         <Group>

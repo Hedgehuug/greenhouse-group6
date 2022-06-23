@@ -1,0 +1,12 @@
+--cpu Cortex-M0+
+".\obj\main.o"
+".\obj\timers.o"
+".\obj\queue.o"
+".\obj\rgb.o"
+".\obj\uart0.o"
+".\obj\startup_mkl25z4.o"
+".\obj\system_mkl25z4.o"
+--strict --scatter ".\obj\SerialDemo.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\obj\SerialDemo.map" -o .\obj\SerialDemo.axf
