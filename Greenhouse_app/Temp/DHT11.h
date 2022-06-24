@@ -9,7 +9,7 @@
 
 #include "../tpm1/TPM0.h"
 
-#include "../uart0/uart.h"
+#include "../uart1/uart1.h"
 
 #define DHTLIB_OK				0
 #define DHTLIB_ERROR_CHECKSUM	-1
@@ -22,12 +22,13 @@
 
 
 
-struct DHT {
+typedef struct DHT{
 	uint8_t humidity;
 	uint8_t temperature;
-};
+} DHT_type;
 
 int getDataBit(void);
+DHT_type dht_function();
 
 void checkResponse(unsigned int waitTimeUS, unsigned int margin, bool pinValue);
 

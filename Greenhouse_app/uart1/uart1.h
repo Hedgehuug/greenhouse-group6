@@ -7,6 +7,7 @@
 
 extern queue_t TxQ, RxQ;
 
+
 void uart1_init(void);
 uint32_t uart1_num_rx_chars_available(void);
 char uart1_get_char(void);

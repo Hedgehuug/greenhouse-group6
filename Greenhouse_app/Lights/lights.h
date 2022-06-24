@@ -14,6 +14,8 @@ void water_pwmcontrol(const uint16_t water);
 void fan_onoff(const bool f);
 void fan_pwmcontrol(const uint16_t fan);
 
+void heater_onoff(const bool f);
+
 extern unsigned ldr_light;
 
 #endif // TPM2_H

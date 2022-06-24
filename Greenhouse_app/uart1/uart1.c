@@ -3,6 +3,8 @@
 
 queue_t TxQ, RxQ;
 
+
+
 void uart1_init(void)
 {  
     // enable clock to UART and Port A

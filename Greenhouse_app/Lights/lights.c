@@ -26,8 +26,8 @@ void tpm_init(void)
 	TPM0->MOD = 0xFFFF;
 	TPM0->CONTROLS[1].CnSC = TPM_CnSC_MSB(1) | TPM_CnSC_ELSA(1); // for ch0
 	TPM0->SC = TPM_SC_CMOD(1); //turn on
-	TPM2->CONTROLS[0].CnV = 5000;
-	TPM2->CONTROLS[1].CnV = 60000;
+	TPM2->CONTROLS[0].CnV = 0;
+	TPM2->CONTROLS[1].CnV = 0xFFFF;
 }
 
 
@@ -42,10 +42,10 @@ inline void color_pwmcontrol(const uint16_t color)
 inline void color_onoff(const bool c) // this tuns off and on the light by changing color to 0
 {
     // Set convenient on values for each color here from 0 to 65535   
-    color = 2*1024;
+		color = 5000;
 
     // Set the channel compare values
-    TPM2->CONTROLS[0].CnV = c ? color : 0;
+    TPM2->CONTROLS[1].CnV = c ? color : 0xFFFF;
 }
 
 
@@ -79,8 +79,21 @@ inline void fan_pwmcontrol(const uint16_t fan)
 inline void fan_onoff(const bool f) // this tuns off and on 
 {
     // Set convenient on values for each fan here from 0 to 65535   
-    fan = 2*1024;
+    fan = 0xFFFF;
 
     // Set the channel compare values
-    TPM2->CONTROLS[0].CnV = f ? fan : 0;
+    TPM0->CONTROLS[1].CnV = f ? 0 : fan;
+}
+
+void heater_onoff(const bool f)
+{
+	if (f)
+	{
+		PTA->PSOR |= (1<<1);
+	}
+	else
+		{
+			PTA->PCOR |= (1<<1);
+		}
+		
 }

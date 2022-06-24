@@ -63,13 +63,17 @@ void UART1_IRQHandler(void)
     if (UART1->S1 & UART_S1_RDRF_MASK)
     {
         c = UART1->D;
-        
+			
+			
+			
+        /*
         if(!q_enqueue(&RxQ, c))
         {
             // error - queue full.
             while (1)
             {;}
         }
+			*/
     }
     if (UART1->S1 & (UART_S1_OR_MASK | UART_S1_NF_MASK | 
                      UART_S1_FE_MASK | UART_S1_PF_MASK))

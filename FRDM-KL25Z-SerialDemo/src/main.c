@@ -43,6 +43,7 @@ int main (void)
     rgb_on(false, false, false);
 
     uint32_t fake_sensor=0;
+	
     
     pit_start();
 
@@ -67,6 +68,13 @@ int main (void)
         // Enough data available?
         if(q_size(&RxQ) >= 4)
         {
+					int i = 0;
+					do 
+					{
+						bool result = q_dequeue(&RxQ, &receiveString[i]);
+						i++;
+					}
+					while (receiveString[i] != '\n');
             uint8_t r;
             uint8_t g;
             uint8_t b;

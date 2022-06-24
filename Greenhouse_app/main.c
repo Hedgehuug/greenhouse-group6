@@ -9,10 +9,35 @@ void init_DAC()
 	
 	ADC0->CFG1 = 0x9C;
 }
+uint16_t checkAnalog(int channel)
+{
+	ADC0->SC1[0] = channel;
+	
+	while (! (ADC0->SC1[0] & ADC_SC1_COCO_MASK))
+	{;}
+		
+	uint16_t res = ADC0->R[0];
+	return res;
+}
+
+
+
+unsigned char receiveString[10];
+
 
 
 // Global Variables
 struct DHT dht11;
+
+// Global Sensor Values
+uint16_t LDR_value;					// LDR Level
+uint16_t SoilMoisture;			// Soil Moisture Level
+
+
+// Global Setting values
+int heaterTemp = 20;
+int fanTemp = 27;
+int soilMoistTrigger = 40000;
 
 int dataBits[40];
 uint8_t dataBytes[5];
@@ -45,284 +70,113 @@ int main(void)
 	// Initialise timers
 	tpm_init();
 	
-	// Initialise Uart0
+	// Initialise Uart1
 	uart1_init();
 	
 	// Starting string for UART
-	uart1_send_string("DHT Capture\r\n");
 	// TPM1 Setup, NOT TPM0
 	timer0init();
 
 	// Enables timer to PORTA
 	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
+	PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
+	PTA->PDDR |= (1<<1);
+	int pumpCounter = 0;
+	
 	while(1)
 	{
 		delay_us(2000000);
-		
-    PORTA->PCR[1] = 256;
-	
-    //configure the pin as an output
-    PTA->PDDR |= MASK(1);
-    //write the pin you're using as output and put it low ( to 0) for 18milliseconds
-    PTA->PCOR |= MASK(1);
-    delay_us(18000);
-
-    // then write it as HIGH (to 1) for 40 microseconds
-    PTA->PDOR |= MASK(1);
-
-		
-		//STEP 3: Pull HIGH and switch to input mode
-		//pull-up will pull it HIGH after switching to input mode.
-    PTA->PDDR &= ~MASK(1); //set to input
-		
-		//STEP 4: Wait between 20 to 40us for sensor to respond
-		
-		while(PTA->PDIR & MASK(1)){
-			;
-		}
-		
-		//STEP 5: Check for 80us LOW followed by 80us HIGH
-		checkResponse(240,30,LOW);
-		checkResponse(240,30,HIGH);
-		
-		//After this DHT sends data. Each bit has a preceding 50us LOW. After which 26-28us means '0' and 70us means '1'
-		
-		//STEP 6: Fetch data
-		int data;
-
-		
-		for(int i=0; i < 40; i++)
-		{
-			data = getDataBit();
-			
-			dataBits[i] = data;
-			
-			
-			if(data == 0 || data == 1)
-			{
-				dataBits[i] = data;
-			}
-			else{
-				uart1_send_string("error\r\n");
-				break;
-			}
-		}
-
-		
-		//STEP 7: Extract data bytes from array
-		data = 0;
-		for(int i=0; i<5; i++) // i is the BYTE counter
-		{
-			for(int j=0; j<8; j++) // j gives the current position of a bit in i'th BYTE
-			{
-				if( dataBits[ 8*i + j ] )
-					data |= (1<<(7-j)); //we need to only shift 1's by ([BYTESZIE-1] - bitLocation) = (7-j)
-			}
-			dataBytes[i] = data;
-			data = 0;
-		}
-		dht11.humidity = dataBytes[0];
-		dht11.temperature = dataBytes[2];
-		
 		char str[32], str2[32];
+		/*
+		 if(q_size(&RxQ) >= 4)
+        {
+					int i = 0;
+					do 
+					{
+						bool result = q_dequeue(&RxQ, &receiveString[i]);
+						i++;
+					}
+					while (receiveString[i] != '\n' || i<11);
+				}
+		*/
 		
-		sprintf((char *)str,"hum = %d\r\n", dht11.humidity);
-		sprintf((char *)str2,"temp = %d\r\n", dht11.temperature);
-		
-		uart1_send_string(str2);
-		//uart0_send_string(str2);
+					
+			
 		
 		
-		//STEP8: Wait for atleast 1-2 second before probing again
+		// Fetch Temperature and humidity 
+		dht11 = dht_function();
+		
+		LDR_value = checkAnalog(0);
+		
+		SoilMoisture = 0xFFFF - checkAnalog(8);
+		
+		// Check LDR Flag
+		if (LDR_value >= 55000)
+		{
+			color_pwmcontrol(0);
+		}
+		else{
+			color_pwmcontrol(0xFFFF);
+		}
+		
+		// Check temperature, either enable heater or fan
+		if (dht11.temperature >= fanTemp)
+		{
+			fan_onoff(true);
+			status_flags[1] = 1;
+		}
+		else
+		{
+			fan_onoff(false);
+			status_flags[1] = 0;
+		}
+		
+		// Turn on heater if temperature is below desired
+		if (dht11.temperature <= heaterTemp)
+		{
+			heater_onoff(true);
+			status_flags[0] = 1;
+		}
+		else
+		{
+			heater_onoff(false);
+			status_flags[0] = 0;
+		}
+		
+		
+		sprintf((char *)str,"t%d\n", dht11.temperature);
+		
+		// Check Soil Moisture
+		if (SoilMoisture <= soilMoistTrigger && pumpCounter == 0)
+		{
+			color_onoff(true);
+			pumpCounter++;
+			status_flags[2] = 1;
+		}
+		else if (pumpCounter >= 2)
+		{
+			pumpCounter = 0;
+			color_onoff(false);
+			status_flags[2] = 0;
+		}
+		else if (pumpCounter < 2 && pumpCounter > 0)
+		{
+			pumpCounter++;
+		}
+		
+		
+		//sprintf((char *)str,"hum = %d\r\n", dht11.humidity);
+		//sprintf((char *)str2,"temp = %d\r\n", dht11.temperature);
+		
+		uart1_send_string(str);
+		
 	}
 	
-	
-	
-	
-	/*
-	-----CODE FOR LDR TESTING
-	while (1){
-		ADC0->SC1[0] = 0x03;
-		
-		while (! (ADC0->SC1[0] & ADC_SC1_COCO_MASK))
-		{;}
-			
-		res = ADC0->R[0];
-		if (res > 50000){
-		PTB->PDDR &= ~(1<<0);
-		}
-		else
-		{
-			PTB->PDDR |= (1<<0);
-		}
-		
-		
-		if (res > 35000){
-		PTB->PDDR &= ~(1<<1);
-		}
-		else
-		{
-			PTB->PDDR |= (1<<1);
-		}
-			
-			
-			
-		}
-		*/
 	return 0;
 }
 
 
-/*
--------MAIN FILE FROM DHT11
-//main
-
-//Function Prototypes
-
-struct DHT dht11;
-
-static void delay_us(uint32_t d);
-
-
-// We're using PTA1 as the Pin
-//static volatile uint32_t count;
-
-//global variables
-
-struct DHT dht11;
-
-int dataBits[40];
-uint8_t dataBytes[5];
-	
-int main(void)
-{	
-	uart0_init();
-	
-	uart0_send_string("DHT Capture\r\n");
-	
-	timer0init();
-	
-	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	
-	while(1)
-	{
-		delay_us(2000000);
-		
-    PORTA->PCR[1] = 256;
-	
-    //configure the pin as an output
-    PTA->PDDR |= MASK(1);
-    //write the pin you're using as output and put it low ( to 0) for 18milliseconds
-    PTA->PCOR |= MASK(1);
-    delay_us(18000);
-
-    // then write it as HIGH (to 1) for 40 microseconds
-    PTA->PDOR |= MASK(1);
-    //delay_us(40);
-		
-		//STEP 3: Pull HIGH and switch to input mode
-		//pull-up will pull it HIGH after switching to input mode.
-		//PORTA->PCR[1] = 0b00100000011;
-    PTA->PDDR &= ~MASK(1); //set to input
-		//PORTA->PCR[1] = 0b00100000011;
-		
-		//STEP 4: Wait between 20 to 40us for sensor to respond
-		
-//		timerStart();
-//		while((PTA->PDIR & MASK(1)) != 0)
-//		{
-//			if(TPM0->CNT > 80) break; //Timeout
-//		}
-//	  unsigned int time = timerStop();
-//		
-//		if(time < 40 || time > 80) 
-//		{ 
-//			return 0;
-//		}
-		while(PTA->PDIR & MASK(1)){
-			;
-		}
-		
-		//STEP 5: Check for 80us LOW followed by 80us HIGH
-		checkResponse(240,30,LOW);
-		checkResponse(240,30,HIGH);
-		
-		//After this DHT sends data. Each bit has a preceding 50us LOW. After which 26-28us means '0' and 70us means '1'
-		
-		//STEP 6: Fetch data
-		int data;
-
-		
-		for(int i=0; i < 40; i++)
-		{
-			data = getDataBit();
-			
-			dataBits[i] = data;
-			
-			
-			if(data == 0 || data == 1)
-			{
-				dataBits[i] = data;
-			}
-			else{
-				uart0_send_string("error\r\n");
-				break;
-			}
-		}
-		
-//		for(int i=0; i < 40; i++)
-//		{
-//			char str[32];
-//			sprintf(str,"%d\r\n", dataBits[i]);
-//			uart0_send_string(str);
-//		}
-		
-		//STEP 7: Extract data bytes from array
-		data = 0;
-		for(int i=0; i<5; i++) // i is the BYTE counter
-		{
-			for(int j=0; j<8; j++) // j gives the current position of a bit in i'th BYTE
-			{
-				if( dataBits[ 8*i + j ] )
-					data |= (1<<(7-j)); //we need to only shift 1's by ([BYTESZIE-1] - bitLocation) = (7-j)
-			}
-			dataBytes[i] = data;
-			data = 0;
-		}
-		dht11.humidity = dataBytes[0];
-		dht11.temperature = dataBytes[2];
-		
-		char str[32], str2[32];
-		
-		sprintf(str,"hum = %d\r\n", dht11.humidity);
-		sprintf(str2,"temp = %d\r\n", dht11.temperature);
-		
-		uart0_send_string(str);
-		uart0_send_string(str2);
-		
-		
-		//STEP8: Wait for atleast 1-2 second before probing again
-	}
-}
-
-static void delay_us(uint32_t d)
-{
-
-#if (CLOCK_SETUP != 1)
-#warning This delay function does not work as designed
-#endif
-
-    volatile uint32_t t;
-
-    for(t=4*d; t>0; t--)
-    {
-        __asm("nop");
-        __asm("nop");
-    }
-}
-
-
-*/
 
 
 static void delay_us(uint32_t d)

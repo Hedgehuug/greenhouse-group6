@@ -8,4 +8,6 @@
   C:\Users\hedge\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_compiler.h \
   C:\Users\hedge\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include\cmsis_armclang.h \
   RTE\Device\MKL25Z32xxx4\system_MKL25Z4.h Temp\..\tpm1\TPM0.h \
-  Temp\..\uart0\uart.h Temp\..\uart0\..\queue\queue.h
+  Temp\..\uart1\uart1.h \
+  C:\Users\hedge\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.H \
+  Temp\..\uart1\..\queue\queue.h

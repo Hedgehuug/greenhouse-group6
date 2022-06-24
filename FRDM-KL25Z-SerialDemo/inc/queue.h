@@ -49,6 +49,8 @@ typedef struct
     
 }queue_t;
 
+		unsigned char receiveString[10];
+
 
 void q_init(queue_t *q);
 uint32_t q_size(const queue_t *q);
