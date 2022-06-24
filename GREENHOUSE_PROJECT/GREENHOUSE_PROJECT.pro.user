@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 5.0.0, 2022-06-24T04:43:39. -->
+<!-- Written by QtCreator 5.0.0, 2022-06-24T11:33:57. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -237,8 +237,9 @@
     <valuelist type="QVariantList" key="CustomOutputParsers"/>
     <value type="int" key="PE.EnvironmentAspect.Base">2</value>
     <valuelist type="QVariantList" key="PE.EnvironmentAspect.Changes"/>
-    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/tyrep/OneDrive/Documents/DBINSET-LeonNguyen-670876/GREENHOUSE_PROJECT/GREENHOUSE_PROJECT.pro</value>
-    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/tyrep/OneDrive/Documents/DBINSET-LeonNguyen-670876/GREENHOUSE_PROJECT/GREENHOUSE_PROJECT.pro</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName">GREENHOUSE_PROJECT2</value>
+    <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:C:/Users/tyrep/OneDrive/Documents/GitHub/greenhouse-group6/GREENHOUSE_PROJECT/GREENHOUSE_PROJECT.pro</value>
+    <value type="QString" key="ProjectExplorer.RunConfiguration.BuildKey">C:/Users/tyrep/OneDrive/Documents/GitHub/greenhouse-group6/GREENHOUSE_PROJECT/GREENHOUSE_PROJECT.pro</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>
     <value type="bool" key="RunConfiguration.UseLibrarySearchPath">true</value>

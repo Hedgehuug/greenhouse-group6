@@ -497,19 +497,22 @@ void Dialog :: serialRead(void)
     case 'f':
         rxbuffer[i] = '\0';
         fanTrigger = rxbuffer.constData()+1;
-        updateFanTrigger();
+        qDebug() << "Fan Trigger updated: ["
+                 << fanTriggerTemp->text() << "]";
         break;
 
     case'e':
         rxbuffer[i] = '\0';
         heaterTrigger = rxbuffer.constData()+1;
-        updateHeaterTrigger();
+        qDebug() << "Heater Trigger updated: ["
+                 << heaterTriggerTemp->text() << "]";
         break;
 
     case 'i':
         rxbuffer[i] = '\0';
         lightTrigger = rxbuffer.constData()+1;
-        updateLightTrigger();
+        qDebug() << "Light Trigger updated: ["
+                 << lightLevelTrigger->text() << "]";
         break;
 
     default:
