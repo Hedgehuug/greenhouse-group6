@@ -1,0 +1,19 @@
+--cpu Cortex-M0+
+".\objects\main.o"
+".\objects\flags.o"
+".\objects\sensor.o"
+".\objects\dht11.o"
+".\objects\lights.o"
+".\objects\tpm0.o"
+".\objects\uart.o"
+".\objects\queue.o"
+".\objects\uart1.o"
+".\objects\lcd.o"
+".\objects\i2c.o"
+".\objects\driver.o"
+".\objects\startup_mkl25z4.o"
+".\objects\system_mkl25z4.o"
+--library_type=microlib --strict --scatter ".\Objects\greenhouse.sct"
+--summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Objects\greenhouse.map" -o .\Objects\greenhouse.axf
