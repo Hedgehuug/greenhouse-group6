@@ -150,6 +150,8 @@ void Dialog :: createUserInputs()
     COM = new QLineEdit();
     info = new QLabel();
 
+    connect(buttonc, SIGNAL(clicked()), this, SLOT(serialConnect()));
+
     QPushButton *buttonFanTriggerTemp = new QPushButton(tr("Fan trigger temperature"));
     QPushButton *buttonHeaterTriggerTemp = new QPushButton(tr("Heater trigger temperature"));
     QPushButton *buttonLightLevelTrigger = new QPushButton(tr("Light %Level trigger"));
@@ -283,6 +285,11 @@ void Dialog :: pushFanTrigger()
         tN = 40;
         qDebug() << "Number is above 40, automatically set to 40";
     }
+    if(tN < 0)
+    {
+        tN = 0;
+        qDebug() << "Number is below 0, automatically set to 0";
+    }
     fanTrigger = QString("%1").arg(tN);
 
     updateFanTrigger();
@@ -314,6 +321,11 @@ void Dialog :: pushHeaterTrigger()
         tN = 40;
         qDebug() << "Number is above 40, automatically set to 40";
     }
+    if(tN < 0)
+    {
+        tN = 0;
+        qDebug() << "Number is below 0, automatically set to 0";
+    }
     heaterTrigger = QString("%1").arg(tN);
 
     updateHeaterTrigger();
@@ -344,6 +356,11 @@ void Dialog :: pushLightTrigger()
     {
         tN = 100;
         qDebug() << "Number is above 100, automatically set to 100";
+    }
+    if(tN < 0)
+    {
+        tN = 0;
+        qDebug() << "Number is below 0, automatically set to 0";
     }
     lightTrigger = QString("%1").arg(tN);
 
