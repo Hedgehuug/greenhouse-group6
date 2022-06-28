@@ -533,7 +533,7 @@ void Dialog :: serialRead(void)
         break;
 
     default:
-        info -> setText(tr("Problem with identifying"));
+        info -> setText(tr("Problem with identifying the text"));
         break;
     }
     // Show the received string
