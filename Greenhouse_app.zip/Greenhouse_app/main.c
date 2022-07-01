@@ -28,7 +28,7 @@ unsigned char receiveString[10];
 
 
 // Global Variables
-struct DHT dht11;
+DHT_type dht11;
 
 // Global Sensor Values
 uint16_t LDR_value;					// LDR Level
@@ -40,13 +40,13 @@ int heaterTemp = 20;
 int fanTemp = 29;
 int soilMoistTrigger = 45000;
 
-int dataBits[40];
-uint8_t dataBytes[5];
+//int dataBits[40];
+//uint8_t dataBytes[5];
 
 // Function Prototypes
 static void delay_us(uint32_t d);
 
-static void delay_m(uint32_t d);
+//static void delay_m(uint32_t d);
 
 void displayLCD(int val, int val2);
 
@@ -74,6 +74,9 @@ volatile bool status_flags[8] = {0,0,0,0,0,0,0,0};
 // To-do:
 // Get header file reference because uVision doesn't set it up for us
 
+
+// TEST CODE -------------------------------
+int loop_counter = 0;
 int main(void)
 {
 	init_DAC();
@@ -84,7 +87,7 @@ int main(void)
 	
 	//PCF8574T_Init(0x27, delay_MS, I2C_Write_byt);
 	
-	buttonInit();
+	//buttonInit();
 	
 	
 	// Result of the check
@@ -100,8 +103,8 @@ int main(void)
 	timer0init();
 
 	// Enables timer to PORTA
-	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
+	//SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
+	//PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
 	int pumpCounter = 0;
 	PORTB->PCR[1] |= PORT_PCR_MUX(1);
 	
@@ -111,7 +114,7 @@ int main(void)
 		
 		char str[32], str2[32];
 		
-//		 if(q_size(&RxQ) >= 4)
+//		 if(q_size(&RxQ) >= 6)
 //        {
 //					int i = 0;
 //					do 
@@ -128,11 +131,25 @@ int main(void)
 		
 		
 		// Fetch Temperature and humidity 
+	
 		dht11 = dht_function();
+		
 		sprintf((char *)str,"t%d\n", dht11.temperature);
-//				uart1_send_string(str);
-//						sprintf((char *)str,"h%d\n", dht11.humidity);
-//				uart1_send_string(str);
+		sprintf((char *)str2,"h%d\n", dht11.humidity);
+					
+	
+		if (loop_counter == 0)
+		{
+			loop_counter++;
+			uart1_send_string(str);
+		}	
+		else if(loop_counter == 1)
+		{
+			loop_counter = 0;
+			uart1_send_string(str2);
+		}
+					
+		
 						
 		
 		LDR_value = checkAnalog(0);
@@ -227,9 +244,6 @@ void displayLCD(int val, int val2){
 static void delay_us(uint32_t d)
 {
 
-#if (CLOCK_SETUP != 1)
-#warning This delay function does not work as designed
-#endif
 
     volatile uint32_t t;
 
@@ -240,18 +254,18 @@ static void delay_us(uint32_t d)
     }
 }
 
-static void delay_m(uint32_t d)
-{
+//static void delay_m(uint32_t d)
+//{
 
-#if (CLOCK_SETUP != 1)
-#warning This delay function does not work as designed
-#endif
+//#if (CLOCK_SETUP != 1)
+//#warning This delay function does not work as designed
+//#endif
 
-    volatile uint32_t t;
+//    volatile uint32_t t;
 
-    for(t=4000*d; t>0; t--)
-    {
-        __asm("nop");
-        __asm("nop");
-    }
-}
+//    for(t=4000*d; t>0; t--)
+//    {
+//        __asm("nop");
+//        __asm("nop");
+//    }
+//}

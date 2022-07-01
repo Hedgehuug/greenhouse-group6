@@ -5,5 +5,5 @@
   C:\Users\Adil\ Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_version.h \
   C:\Users\Adil\ Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h \
   C:\Users\Adil\ Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h \
-  RTE\Device\MKL25Z32xxx4\system_MKL25Z4.h uart1\..\queue\queue.h \
+  RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h uart1\..\queue\queue.h \
   C:\Keil_v5\ARM\ARMCLANG\Bin\..\include\stdbool.h

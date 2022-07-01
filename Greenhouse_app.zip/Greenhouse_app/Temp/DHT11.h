@@ -28,7 +28,7 @@ typedef struct DHT{
 } DHT_type;
 
 int getDataBit(void);
-DHT_type dht_function();
+DHT_type dht_function(void);
 
 void checkResponse(unsigned int waitTimeUS, unsigned int margin, bool pinValue);
 

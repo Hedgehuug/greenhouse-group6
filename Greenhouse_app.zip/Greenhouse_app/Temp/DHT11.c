@@ -81,7 +81,7 @@ int getDataBit(void)
 	return temp;
 }
 
-DHT_type dht_function()
+DHT_type dht_function(void)
 {
 	int dataBits[40];
 	uint8_t dataBytes[5];
