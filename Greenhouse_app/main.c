@@ -78,9 +78,7 @@ int main(void)
 	timer0init();
 
 	// Enables timer to PORTA
-	SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
-	PTA->PDDR |= (1<<1);
+	//SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
 	int pumpCounter = 0;
 	
 	while(1)
