@@ -6,13 +6,11 @@ Dialog::Dialog(QWidget *parent)
 {
     mainLayout = new QGridLayout();
     menu();
-    htmlfile.setFileName("greenhouse.html");
     setWindowTitle(tr("GreenHouse by Bazil Bozos"));
 }
 
 Dialog::~Dialog()
 {
-    htmlfile.close();
     serial->close();
     delete serial;
 }
@@ -119,10 +117,10 @@ void Dialog :: createDevInputs()
     displayLightLevel = new QLabel;
     displayLightLevel -> setText(QString("%1").arg(lightLevel));
 
-    checkBoolHeater(boolHeater);
-    checkBoolFan(boolFan);
-    checkBoolPump(boolPump);
-    checkBoolLight(boolLight);
+    flagHeater -> setText("Nan");
+    flagFan -> setText("Nan");
+    flagPump-> setText("Nan");
+    flagLight -> setText("Nan");
 
     formDevInputs = new QFormLayout;
     formDevInputs -> addRow(flagLabelHeater, flagHeater);
@@ -261,15 +259,6 @@ void Dialog :: checkBoolLight(int d)
     }
 }
 
-void Dialog :: updateActuators()
-{    
-    qDebug() << "Actuators updated: ["
-             << boolHeater << ","
-             << boolFan << ","
-             << boolPump << ","
-             << boolLight << "]";
-}
-
 void Dialog :: pushFanTrigger()
 {
     bool check;
@@ -378,6 +367,48 @@ void Dialog :: pushLightTrigger()
     }
 }
 
+void Dialog :: updateActuators()
+{
+    checkBoolHeater(boolHeater);
+    checkBoolFan(boolFan);
+    checkBoolPump(boolPump);
+    checkBoolLight(boolLight);
+
+    qDebug() << "Actuators updated: ["
+             << boolHeater << ","
+             << boolFan << ","
+             << boolPump << ","
+             << boolLight << "]";
+}
+
+void Dialog :: updateTemperature()
+{
+    displayTemp -> setText(QString("%1").arg(temp));
+    qDebug() << "Temperature: ["
+             << displayTemp->text() << "]";
+}
+
+void Dialog :: updateHumidity()
+{
+    displayHumid -> setText(QString("%1").arg(humid));
+    qDebug() << "Humidity updated: ["
+             << displayHumid->text() << "]";
+}
+
+void Dialog :: updateSoilMoisture()
+{
+    displaySoilMoist -> setText(QString("%1").arg(soilMoist));
+    qDebug() << "Soil Moisture updated: ["
+             << displaySoilMoist->text() << "]";
+}
+
+void Dialog :: updateLight()
+{
+    displayLightLevel -> setText(QString("%1").arg(lightLevel));
+    qDebug() << "Light Level updated: ["
+             << displayLightLevel->text() << "]";
+}
+
 void Dialog :: updateFanTrigger()
 {
     fanTriggerTemp -> setText(QString("%1").arg(fanTrigger));
@@ -438,7 +469,20 @@ void Dialog :: serialConnect(void)
         buttonc->setEnabled(false);
         COM->setEnabled(false);
 
+        temp = QString("0");
+        humid = QString("0");
+        soilMoist = QString("0");
+        lightLevel = QString("0");
+
+        heaterTrigger = QString("25");
+        fanTrigger = QString("40");
+        lightTrigger = QString("0");
+
         updateActuators();
+        updateTemperature();
+        updateHumidity();
+        updateSoilMoisture();
+        updateLight();
         updateFanTrigger();
         updateHeaterTrigger();
         updateLightTrigger();
@@ -453,6 +497,7 @@ void Dialog :: serialRead(void)
     }
 
     rxbuffer.append(serial->readAll());
+    qDebug() << rxbuffer;
 
     // Synchronise on the \n character
     // string that is terminated with a \n character. Here are some examples:
@@ -470,44 +515,31 @@ void Dialog :: serialRead(void)
         boolFan = rxbuffer[2];
         boolPump = rxbuffer[3];
         boolLight = rxbuffer[4];
-
-        checkBoolHeater(boolHeater);
-        checkBoolFan(boolFan);
-        checkBoolPump(boolPump);
-        checkBoolLight(boolLight);
         updateActuators();
         break;
 
     case 't':
         rxbuffer[i] = '\0';
         temp = rxbuffer.constData()+1;
-        displayTemp -> setText(QString("%1").arg(temp));
-        qDebug() << "Temperature: ["
-                 << displayTemp->text() << "]";
+        updateTemperature();
         break;
 
     case 'h':
         rxbuffer[i] = '\0';
         humid = rxbuffer.constData()+1;;
-        displayHumid -> setText(QString("%1").arg(humid));
-        qDebug() << "Humidity updated: ["
-                 << displayHumid->text() << "]";
+        updateHumidity();
         break;
 
     case 's':
         rxbuffer[i] = '\0';
         soilMoist = rxbuffer.constData()+1;
-        displaySoilMoist -> setText(QString("%1").arg(soilMoist));
-        qDebug() << "Soil Moisture updated: ["
-                 << displaySoilMoist->text() << "]";
+        updateSoilMoisture();
         break;
 
     case 'l':
         rxbuffer[i] = '\0';
         lightLevel = rxbuffer.constData()+1;
-        displayLightLevel -> setText(QString("%1").arg(lightLevel));
-        qDebug() << "Light Level updated: ["
-                 << displayLightLevel->text() << "]";
+        updateLight();
         break;
 
     case 'f':
@@ -540,22 +572,6 @@ void Dialog :: serialRead(void)
 
     // Clear the buffer
     rxbuffer.clear();
-
-    // Create an HTML page and update the HTML file
-    htmlfile.resize(0);
-    QTextStream out(&htmlfile);
-    out << "<!DOCTYPE html>";
-    out << "<html>";
-    out << "<head>";
-    out << "  <title>PROJ</title>";
-    out << "  <meta http-equiv=\"refresh\" content=\"2\">";
-    out << "</head>";
-    out << "<body>";
-    out << "  <h1>PROJ Greenhouse</h1>";
-    out << "  <p>Number from the FRDM-KL25Z via the serial interface:</p>";
-    out << info->text();
-    out << "</body>";
-    out << "</html>";
 }
 
 void Dialog :: serialError(QSerialPort::SerialPortError error)

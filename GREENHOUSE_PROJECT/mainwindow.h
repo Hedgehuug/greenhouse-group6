@@ -62,7 +62,10 @@ private slots:
      void checkBoolLight(int d);
 
      void updateActuators();
-
+     void updateTemperature();
+     void updateHumidity();
+     void updateSoilMoisture();
+     void updateLight();
      void updateFanTrigger();
      void updateHeaterTrigger();
      void updateLightTrigger();
