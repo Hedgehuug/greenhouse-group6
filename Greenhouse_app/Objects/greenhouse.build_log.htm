@@ -3,9 +3,9 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Tool Versions:</h2>
-IDE-Version: ÂµVision V5.36.0.0
+IDE-Version: µVision V5.36.0.0
 Copyright (C) 2021 ARM Ltd and ARM Germany GmbH. All rights reserved.
-License Information: Ben Waldinger, HAN, LIC=----
+License Information: Ben Waldinger, Hogeschool Arnhem en Nijmegen, LIC=----
  
 Tool Versions:
 Toolchain:       MDK-Lite  Version: 5.36.0.0
@@ -21,24 +21,33 @@ Target DLL:      CMSIS_AGDI.dll V1.33.0.0
 Dialog DLL:      TARMCM1.DLL V1.14.4.0
  
 <h2>Project:</h2>
-C:\Users\hedge\OneDrive\Documents\github\greenhouse-group6\Greenhouse_app\greenhouse.uvprojx
-Project File Date:  06/23/2022
+\\Mac\Home\Documents\GitHub\greenhouse-group6\Greenhouse_app\greenhouse.uvprojx
+Project File Date:  06/28/2022
 
 <h2>Output:</h2>
 *** Using Compiler 'V6.16', folder: 'C:\Keil_v5\ARM\ARMCLANG\Bin'
 Build target 'greenhouse'
 compiling main.c...
+compiling flags.c...
+compiling sensor.c...
+compiling DHT11.c...
+compiling lights.c...
+compiling TPM0.c...
+compiling uart.c...
+compiling queue.c...
+compiling uart1.c...
+compiling system_MKL25Z4.c...
 linking...
-Program Size: Code=2970 RO-data=250 RW-data=16 ZI-data=2368  
+Program Size: Code=2942 RO-data=250 RW-data=16 ZI-data=2368  
 ".\Objects\greenhouse.axf" - 0 Error(s), 0 Warning(s).
 
 <h2>Software Packages used:</h2>
 
 Package Vendor: ARM
-                http://www.keil.com/pack/ARM.CMSIS.5.9.0.pack
-                ARM.CMSIS.5.9.0
+                http://www.keil.com/pack/ARM.CMSIS.5.8.0.pack
+                ARM.CMSIS.5.8.0
                 CMSIS (Common Microcontroller Software Interface Standard)
-   * Component: CORE Version: 5.6.0
+   * Component: CORE Version: 5.5.0
 
 Package Vendor: Keil
                 http://www.keil.com/pack/Keil.Kinetis_KLxx_DFP.1.15.0.pack
@@ -49,18 +58,18 @@ Package Vendor: Keil
 <h2>Collection of Component include folders:</h2>
   .\RTE\Device\MKL25Z32xxx4
   .\RTE\_greenhouse
-  C:\Users\hedge\AppData\Local\Arm\Packs\ARM\CMSIS\5.9.0\CMSIS\Core\Include
-  C:\Users\hedge\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include
+  C:\Users\Ben\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include
+  C:\Users\Ben\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include
 
 <h2>Collection of Component Files used:</h2>
 
-   * Component: ARM::CMSIS:CORE:5.6.0
+   * Component: ARM::CMSIS:CORE:5.5.0
 
    * Component: Keil::Device:Startup:2.5.0
-      Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Include file:  Device\Source\system_MKL25Z4.h
+      Source file:   Device\Source\ARM\startup_MKL25Z4.s
       Source file:   Device\Source\system_MKL25Z4.c
-Build Time Elapsed:  00:00:01
+Build Time Elapsed:  00:00:13
 </pre>
 </body>
 </html>
