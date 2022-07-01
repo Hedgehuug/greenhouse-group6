@@ -370,8 +370,8 @@ void Dialog :: pushLightTrigger()
     {
         QByteArray data;
         data.append('l'); //"l"
-        data.append(tN);
-        data.append("\n"); //"l...\n"
+        data.append(lightTrigger.toStdString());
+        data.append('\n'); //"l...\n"
 
         serial->write(data);
         serial->flush();
@@ -455,7 +455,6 @@ void Dialog :: serialRead(void)
     rxbuffer.append(serial->readAll());
 
     // Synchronise on the \n character
-    // The only supported string at this moment is a sseven digit
     // string that is terminated with a \n character. Here are some examples:
     auto i = rxbuffer.indexOf('\n');
     // Replace the \n character with a \0 character.
