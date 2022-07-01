@@ -63,7 +63,7 @@ volatile bool status_flags[8] = {0,0,0,0,0,0,0,0};
 int main(void)
 {
 	init_DAC();
-	PORTB->PCR[0] = PORT_PCR_MUX(1);
+	//PORTB->PCR[0] = PORT_PCR_MUX(1);
 	PORTB->PCR[1] = PORT_PCR_MUX(1);
 	// Result of the check
 	volatile unsigned res = 0;
