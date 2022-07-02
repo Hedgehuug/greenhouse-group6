@@ -153,42 +153,37 @@
         <Ww>
           <count>0</count>
           <WinNumber>1</WinNumber>
-          <ItemText>res,0x0A</ItemText>
+          <ItemText>receiveString</ItemText>
         </Ww>
         <Ww>
           <count>1</count>
           <WinNumber>1</WinNumber>
-          <ItemText>res,0x0A</ItemText>
+          <ItemText>LDR_value,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>2</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dht11.temperature,0x0A</ItemText>
+          <ItemText>SoilMoisture,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>3</count>
           <WinNumber>1</WinNumber>
-          <ItemText>str,0x0A</ItemText>
+          <ItemText>lightTrigger,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>4</count>
           <WinNumber>1</WinNumber>
-          <ItemText>receiveString</ItemText>
+          <ItemText>heaterTemp,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>5</count>
           <WinNumber>1</WinNumber>
-          <ItemText>dht11.humidity,0x0A</ItemText>
+          <ItemText>fanTemp,0x0A</ItemText>
         </Ww>
         <Ww>
           <count>6</count>
           <WinNumber>1</WinNumber>
-          <ItemText>LDR_value,0x0A</ItemText>
-        </Ww>
-        <Ww>
-          <count>7</count>
-          <WinNumber>1</WinNumber>
-          <ItemText>SoilMoisture,0x0A</ItemText>
+          <ItemText>str3,0x0A</ItemText>
         </Ww>
       </WatchWindow1>
       <Tracepoint>

@@ -3,6 +3,8 @@
 
 queue_t TxQ, RxQ;
 
+unsigned char receiveString[32];
+
 
 
 void uart1_init(void)
@@ -134,4 +136,19 @@ void uart1_put_char(char c)
     {
         UART1->C2 |= UART_C2_TIE_MASK;
     }        
+}
+
+void uart1_receive_string(unsigned char result_str[])
+{
+		
+	 if(q_size(&RxQ) >= 3)
+        {
+					int i = 0;
+					do 
+					{
+						bool result = q_dequeue(&RxQ, &result_str[i]);
+						i++;
+					}
+					while (result_str[i] != '\n' || i<11);
+				}
 }

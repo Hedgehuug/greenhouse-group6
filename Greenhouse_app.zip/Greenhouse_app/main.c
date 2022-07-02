@@ -23,10 +23,6 @@ uint16_t checkAnalog(int channel)
 
 
 
-unsigned char receiveString[10];
-
-
-
 // Global Variables
 DHT_type dht11;
 
@@ -38,7 +34,9 @@ uint16_t SoilMoisture;			// Soil Moisture Level
 // Global Setting values
 int heaterTemp = 20;
 int fanTemp = 29;
-int soilMoistTrigger = 45000;
+int soilMoistTrigger = 2000;
+int lightTrigger = 55000;
+char localReceive[32];
 
 //int dataBits[40];
 //uint8_t dataBytes[5];
@@ -66,17 +64,25 @@ uint16_t water = 1024;
 uint16_t fan = 1024;
 
 
+#define FLAG_LENGTH 5
+#define HEATER_FLAG 0
+#define FAN_FLAG 1
+#define PUMP_FLAG 2
+#define LIGHT_FLAG 3
+
+
 // Move to header file
 // Gets updated by the sensors, used to trigger activation functions
 volatile bool trigger_flags[8] = {0,0,0,0,0,0,0,0};
 // Shows current status of actuators, used for cross-reference with trigger_flags
-volatile bool status_flags[8] = {0,0,0,0,0,0,0,0};
+volatile int status_flags[FLAG_LENGTH];
 // To-do:
 // Get header file reference because uVision doesn't set it up for us
 
 
 // TEST CODE -------------------------------
 int loop_counter = 0;
+char str[32], str2[32], str3[32];
 int main(void)
 {
 	init_DAC();
@@ -107,37 +113,80 @@ int main(void)
 	//PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
 	int pumpCounter = 0;
 	PORTB->PCR[1] |= PORT_PCR_MUX(1);
-	
+
 	while(1)
 	{
 		delay_us(2000000);
 		
-		char str[32], str2[32];
 		
-//		 if(q_size(&RxQ) >= 6)
-//        {
-//					int i = 0;
-//					do 
-//					{
-//						bool result = q_dequeue(&RxQ, &receiveString[i]);
-//						i++;
-//					}
-//					while (receiveString[i] != '\n' || i<11);
-//				}
-//		
 		
+		uart1_receive_string(receiveString);			// Receive data through UART
+		
+
+		switch (receiveString[0])
+		{
+			case 'l':
+				
+				for (int i = 1; receiveString[i] != '\n'; i++)
+			{
+				localReceive[i-1] = receiveString[i];
+			}
+			
+			int tempLight = atoi(localReceive);
+			lightTrigger = (tempLight*0xFFFF)/100.0;
+				break;
+			case 't':
+				for (int i = 1; receiveString[i] != '\n'; i++)
+				{
+					localReceive[i-1] = receiveString[i];
+				}
+				fanTemp = atoi(localReceive);
+				break;
+			case 'h':
+				for (int i = 1; receiveString[i] != '\n'; i++)
+				{
+					localReceive[i-1] = receiveString[i];
+				}
+				heaterTemp = atoi(localReceive);
+				break;
+			default:
+				break;
+		}
+		//sprintf((char *)receiveString,"%c", '\0');
 					
 			
 		
 		
 		// Fetch Temperature and humidity 
 	
-		dht11 = dht_function();
-		
-		sprintf((char *)str,"t%d\n", dht11.temperature);
-		sprintf((char *)str2,"h%d\n", dht11.humidity);
+		//dht11 = dht_function();
+//		
+//		sprintf((char *)str,"t%d\n", dht11.temperature);
+//		sprintf((char *)str2,"h%d\n", dht11.humidity);
 					
 	
+//		if (loop_counter == 0)
+//		{
+//			loop_counter++;
+//			uart1_send_string(str);
+//		}	
+//		else if(loop_counter == 1)
+//		{
+//			loop_counter = 0;
+//			uart1_send_string(str2);
+//		}
+					
+		
+						
+		
+		LDR_value = checkAnalog(0);
+				sprintf((char *)str,"l%d\n", LDR_value);
+		
+		SoilMoisture = 0xFFFF - checkAnalog(8);
+				sprintf((char *)str2,"s%d\n", SoilMoisture);
+		
+		
+		
 		if (loop_counter == 0)
 		{
 			loop_counter++;
@@ -145,25 +194,30 @@ int main(void)
 		}	
 		else if(loop_counter == 1)
 		{
-			loop_counter = 0;
+			loop_counter++;
 			uart1_send_string(str2);
 		}
-					
-		
-						
-		
-		LDR_value = checkAnalog(0);
-				sprintf((char *)str,"s%d\n", LDR_value);
-		
-		SoilMoisture = 0xFFFF - checkAnalog(8);
-				sprintf((char *)str,"l%d\n", SoilMoisture);
+		else if(loop_counter == 2)
+		{
+			loop_counter = 0;
+			sprintf((char *)str3,"%c", 'a');
+			for(int i = 0; i < FLAG_LENGTH; i++)
+			{
+				sprintf(&str3[i+1],"%d\n", status_flags[i]);
+			}
+			
+			uart1_send_string(str3);
+		}
+				
 		
 		// Check LDR Flag
-		if (LDR_value >= 55000)
+		if (LDR_value >= lightTrigger)
 		{
 			color_pwmcontrol(0);
+			status_flags[LIGHT_FLAG] = 1;
 		}
 		else{
+			status_flags[LIGHT_FLAG] = 0;
 			color_pwmcontrol(0xFFFF);
 		}
 		
@@ -171,41 +225,41 @@ int main(void)
 		if (dht11.temperature >= fanTemp)
 		{
 			fan_onoff(true);
-			status_flags[1] = 1;
+			status_flags[FAN_FLAG] = 1;
 		}
 		else
 		{
 			fan_onoff(false);
-			status_flags[1] = 0;
+			status_flags[FAN_FLAG] = 0;
 		}
 		
 		// Turn on heater if temperature is below desired
 		if (dht11.temperature <= heaterTemp)
 		{
 			heater_onoff(true);
-			status_flags[0] = 1;
+			status_flags[HEATER_FLAG] = 1;
 		}
 		else
 		{
 			heater_onoff(false);
-			status_flags[0] = 0;
+			status_flags[HEATER_FLAG] = 0;
 		}
 		
 		
 		//(char *)str,"t%d\n", dht11.temperature);
 		
 		// Check Soil Moisture
-		if (SoilMoisture <= soilMoistTrigger && pumpCounter == 0)
+		if (SoilMoisture >= soilMoistTrigger && pumpCounter == 0)
 		{
 			color_onoff(true);
 			pumpCounter++;
-			status_flags[2] = 1;
+			status_flags[PUMP_FLAG] = 1;
 		}
 		else if (pumpCounter >= 2)
 		{
 			pumpCounter = 0;
 			color_onoff(false);
-			status_flags[2] = 0;
+			status_flags[PUMP_FLAG] = 0;
 		}
 		else if (pumpCounter < 2 && pumpCounter > 0)
 		{
