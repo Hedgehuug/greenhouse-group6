@@ -287,7 +287,7 @@ void Dialog :: pushFanTrigger()
     {
         QByteArray data;
         data.append('t'); //"t"
-        data.append(tN);
+        data.append(fanTrigger.toStdString());
         data.append("\n"); //"t...\n"
 
         serial->write(data);
@@ -303,7 +303,7 @@ void Dialog :: pushHeaterTrigger()
     if(!check)
     {
         tN = 40;
-        qDebug() << "Please enther a nummber";
+        qDebug() << "Please enter a nummber";
     }
     if(tN > 40)
     {
@@ -323,7 +323,7 @@ void Dialog :: pushHeaterTrigger()
     {
         QByteArray data;
         data.append('h'); //"h"
-        data.append(tN);
+        data.append(heaterTrigger.toStdString());
         data.append("\n"); //"h...\n"
 
         serial->write(data);
@@ -511,10 +511,10 @@ void Dialog :: serialRead(void)
     {
     case 'a':
         rxbuffer[i] = '\0';
-        boolHeater = rxbuffer[1];
-        boolFan = rxbuffer[2];
-        boolPump = rxbuffer[3];
-        boolLight = rxbuffer[4];
+        boolHeater = rxbuffer[1]-48;
+        boolFan = rxbuffer[2]-48;
+        boolPump = rxbuffer[3]-48;
+        boolLight = rxbuffer[4]-48;
         updateActuators();
         break;
 
