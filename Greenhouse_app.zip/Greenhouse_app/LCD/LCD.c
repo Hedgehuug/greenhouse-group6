@@ -61,17 +61,19 @@ void select(int value, int value2){
 }
 }
 
-void mainScreen(struct DHT x){
+void mainScreen(struct DHT x, int percent, char str[]){
 	
 	//first line displays the sensor values
 	
 	char str1[16];
 	
-	sprintf(str1,"H  %d  | T %d C", x.humidity, x.temperature);
+	sprintf(str1,"H %d/T %dC/S %d", x.humidity, x.temperature, percent);
 		
 	PCF8574T_displayString(str1, 1);
 	
 	//second line is made for the flags
+	
+	PCF8574T_displayString(str, 2);
 	
 }
 

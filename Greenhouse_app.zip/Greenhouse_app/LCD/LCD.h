@@ -20,7 +20,7 @@ void buttonInit(void);
 
 void callwrite( char string[], int x, uint8_t line);
 
-void mainScreen(struct DHT x);
+void mainScreen(struct DHT x, int percent, char str[]);
 
 void Enter(void);
 

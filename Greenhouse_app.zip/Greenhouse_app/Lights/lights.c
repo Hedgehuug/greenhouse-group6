@@ -42,7 +42,7 @@ inline void color_pwmcontrol(const uint16_t color)
 inline void color_onoff(const bool c) // this tuns off and on the light by changing color to 0
 {
     // Set convenient on values for each color here from 0 to 65535   
-		color = 5000;
+		color = 0;
 
     // Set the channel compare values
     TPM2->CONTROLS[1].CnV = c ? color : 0xFFFF;

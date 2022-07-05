@@ -9,18 +9,6 @@ void init_DAC()
 	
 	ADC0->CFG1 = 0x9C;
 }
-uint16_t checkAnalog(int channel)
-{
-	ADC0->SC1[0] = channel;
-	
-	while (! (ADC0->SC1[0] & ADC_SC1_COCO_MASK))
-	{;}
-		
-	uint16_t res = ADC0->R[0];
-	return res;
-}
-
-
 
 
 // Global Variables
@@ -29,12 +17,13 @@ DHT_type dht11;
 // Global Sensor Values
 uint16_t LDR_value;					// LDR Level
 uint16_t SoilMoisture;			// Soil Moisture Level
+int soil_Perc;              // Soil Moisture Level in percentage
 
 
 // Global Setting values
 int heaterTemp = 20;
 int fanTemp = 29;
-int soilMoistTrigger = 2000;
+int soilMoistTrigger = 20;
 int lightTrigger = 55000;
 char localReceive[32];
 
@@ -44,18 +33,18 @@ char localReceive[32];
 // Function Prototypes
 static void delay_us(uint32_t d);
 
-//static void delay_m(uint32_t d);
+static void delay_m(uint32_t d);
 
 void displayLCD(int val, int val2);
 
-//void I2C_Write_byt(uint8_t addr, uint8_t *send_data, uint8_t send_data_len){
-//	
-//	i2c_WriteText(I2C0, addr, send_data_len, send_data);
-//}
+void I2C_Write_byt(uint8_t addr, uint8_t *send_data, uint8_t send_data_len){
+	
+	i2c_WriteText(I2C0, addr, send_data_len, send_data);
+}
 
-//void delay_MS(uint16_t time){
-//	delay_m(time);
-//}
+void delay_MS(uint16_t time){
+	delay_m(time);
+}
 
 
 // HOPEFULLY TEMPORARY ----- SETTING UP EXTERN VARIABLES MADE IN LIGHTS.C
@@ -63,8 +52,8 @@ uint16_t color = 1024;
 uint16_t water = 1024;
 uint16_t fan = 1024;
 
-
-#define FLAG_LENGTH 5
+char flagLookup[32] = {'H','F','W','L'};
+#define FLAG_LENGTH 4
 #define HEATER_FLAG 0
 #define FAN_FLAG 1
 #define PUMP_FLAG 2
@@ -82,18 +71,18 @@ volatile int status_flags[FLAG_LENGTH];
 
 // TEST CODE -------------------------------
 int loop_counter = 0;
-char str[32], str2[32], str3[32];
+char str[32], str2[32], str3[32], flagString[32], transferFlag[32], tempString[32], humString[32];
 int main(void)
 {
 	init_DAC();
 	PORTB->PCR[0] = PORT_PCR_MUX(1);
 	PORTB->PCR[1] = PORT_PCR_MUX(1);
 	
-	//i2c_Init(I2C0, ALT3, MULT1, 0x1F);// 100KHz = (48MHz / (2 * 240)) 
+	i2c_Init(I2C0, ALT3, MULT1, 0x1F);// 100KHz = (48MHz / (2 * 240)) 
 	
-	//PCF8574T_Init(0x27, delay_MS, I2C_Write_byt);
+	PCF8574T_Init(0x27, delay_MS, I2C_Write_byt);
 	
-	//buttonInit();
+	buttonInit();
 	
 	
 	// Result of the check
@@ -110,15 +99,13 @@ int main(void)
 
 	// Enables timer to PORTA
 	//SIM->SCGC5 |= SIM_SCGC5_PORTA_MASK;
-	//PORTA->PCR[1] |= PORT_PCR_MUX(1) | PORT_PCR_PE(1) | PORT_PCR_PS(0);
+
 	int pumpCounter = 0;
 	PORTB->PCR[1] |= PORT_PCR_MUX(1);
 
 	while(1)
 	{
 		delay_us(2000000);
-		
-		
 		
 		uart1_receive_string(receiveString);			// Receive data through UART
 		
@@ -149,6 +136,13 @@ int main(void)
 				}
 				heaterTemp = atoi(localReceive);
 				break;
+			case 'm':
+				for (int i = 1; receiveString[i] != '\n'; i++)
+				{
+					localReceive[i-1] = receiveString[i];
+				}
+				soilMoistTrigger = atoi(localReceive);
+				break;
 			default:
 				break;
 		}
@@ -159,22 +153,12 @@ int main(void)
 		
 		// Fetch Temperature and humidity 
 	
-		//dht11 = dht_function();
+		dht11 = dht_function();
 //		
-//		sprintf((char *)str,"t%d\n", dht11.temperature);
-//		sprintf((char *)str2,"h%d\n", dht11.humidity);
+		sprintf((char *)tempString,"t%d\n", dht11.temperature);
+		sprintf((char *)humString,"h%d\n", dht11.humidity);
 					
 	
-//		if (loop_counter == 0)
-//		{
-//			loop_counter++;
-//			uart1_send_string(str);
-//		}	
-//		else if(loop_counter == 1)
-//		{
-//			loop_counter = 0;
-//			uart1_send_string(str2);
-//		}
 					
 		
 						
@@ -182,8 +166,11 @@ int main(void)
 		LDR_value = checkAnalog(0);
 				sprintf((char *)str,"l%d\n", LDR_value);
 		
-		SoilMoisture = 0xFFFF - checkAnalog(8);
-				sprintf((char *)str2,"s%d\n", SoilMoisture);
+		//SoilMoisture = 0xFFFF - checkAnalog(8);
+		soil_Perc = soil_Conv();
+				sprintf((char *)str2,"s%d\n", soil_Perc);
+		
+		//soil_Perc = soil_Conv();
 		
 		
 		
@@ -199,13 +186,19 @@ int main(void)
 		}
 		else if(loop_counter == 2)
 		{
+			loop_counter++;
+			uart1_send_string(tempString);
+		}
+		else if(loop_counter == 3)
+		{
+			loop_counter++;
+			uart1_send_string(humString);
+		}
+		else if(loop_counter == 4)
+		{
 			loop_counter = 0;
 			sprintf((char *)str3,"%c", 'a');
-			for(int i = 0; i < FLAG_LENGTH; i++)
-			{
-				sprintf(&str3[i+1],"%d\n", status_flags[i]);
-			}
-			
+			sprintf((char *)str3+1,"%s\n",transferFlag);
 			uart1_send_string(str3);
 		}
 				
@@ -245,11 +238,27 @@ int main(void)
 			status_flags[HEATER_FLAG] = 0;
 		}
 		
+		// Creates flag string for LCD and Remote bluetooth
+		for(int i = 0; i < FLAG_LENGTH; i++)
+			{
+				sprintf(&transferFlag[i], "%d", status_flags[i]);
+				if (status_flags[i] == 1)
+				{
+				sprintf(&flagString[i],"%c", flagLookup[i]);
+				}
+				else
+				{
+					sprintf(&flagString[i],"%c", ' ');
+				}
+			}
+				
+		
+		
 		
 		//(char *)str,"t%d\n", dht11.temperature);
 		
 		// Check Soil Moisture
-		if (SoilMoisture >= soilMoistTrigger && pumpCounter == 0)
+		if (soil_Perc >= soilMoistTrigger && pumpCounter == 0)
 		{
 			color_onoff(true);
 			pumpCounter++;
@@ -267,13 +276,11 @@ int main(void)
 		}
 		
 		
-		//sprintf((char *)str,"hum = %d\r\n", dht11.humidity);
-		//sprintf((char *)str2,"temp = %d\r\n", dht11.temperature);
 		
 		//uart1_send_string(str);
 		
 //		buttonFunc();
-//		displayLCD(heaterTemp, fanTemp);
+		displayLCD(heaterTemp, fanTemp);
 		
 	}
 	
@@ -284,10 +291,12 @@ int main(void)
 
 
 void displayLCD(int val, int val2){
+	char flagDisplay[48];
+	sprintf(flagDisplay,"flags: %s",flagString);
 	if(y == 0){
 		minX = 0;
 		maxX = 0;
-		mainScreen(dht11);
+		mainScreen(dht11,soil_Perc,flagDisplay);
 		} else{
 		minX = 0;
 		maxX = 1;
@@ -308,18 +317,18 @@ static void delay_us(uint32_t d)
     }
 }
 
-//static void delay_m(uint32_t d)
-//{
+static void delay_m(uint32_t d)
+{
 
-//#if (CLOCK_SETUP != 1)
-//#warning This delay function does not work as designed
-//#endif
+#if (CLOCK_SETUP != 1)
+#warning This delay function does not work as designed
+#endif
 
-//    volatile uint32_t t;
+    volatile uint32_t t;
 
-//    for(t=4000*d; t>0; t--)
-//    {
-//        __asm("nop");
-//        __asm("nop");
-//    }
-//}
+    for(t=4000*d; t>0; t--)
+    {
+        __asm("nop");
+        __asm("nop");
+    }
+}
