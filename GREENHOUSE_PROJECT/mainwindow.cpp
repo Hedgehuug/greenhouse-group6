@@ -152,17 +152,21 @@ void Dialog :: createUserInputs()
 
     QPushButton *buttonFanTriggerTemp = new QPushButton(tr("Fan trigger temperature"));
     QPushButton *buttonHeaterTriggerTemp = new QPushButton(tr("Heater trigger temperature"));
+    QPushButton *buttonSoilMoistTrigger = new QPushButton(tr("Moisture trigger temperature"));
     QPushButton *buttonLightLevelTrigger = new QPushButton(tr("Light %Level trigger"));
 
     fanTriggerTemp = new QLineEdit;
     heaterTriggerTemp = new QLineEdit;
+    soilMoistureTrigger = new QLineEdit;
     lightLevelTrigger = new QLineEdit;
 
-    fanTriggerTemp -> setText(QString("%1").arg(temp));
-    heaterTriggerTemp -> setText(QString("%1").arg(temp));
-    lightLevelTrigger -> setText(QString("%1").arg(temp));
+    fanTriggerTemp -> setText(QString("%1").arg(fanTrigger));
+    heaterTriggerTemp -> setText(QString("%1").arg(heaterTrigger));
+    soilMoistureTrigger -> setText(QString("%1").arg(soilMoistTrigger));
+    lightLevelTrigger -> setText(QString("%1").arg(lightLevel));
 
     connect(buttonFanTriggerTemp, SIGNAL(clicked()), this, SLOT(pushFanTrigger()));
+    connect(buttonSoilMoistTrigger, SIGNAL(clicked()), this , SLOT(pushSoilMoistTrigger()));
     connect(buttonHeaterTriggerTemp, SIGNAL(clicked()), this, SLOT(pushHeaterTrigger()));
     connect(buttonLightLevelTrigger, SIGNAL(clicked()), this, SLOT(pushLightTrigger()));
 
@@ -171,6 +175,7 @@ void Dialog :: createUserInputs()
     formUserInputs -> addRow(buttonFanTriggerTemp, fanTriggerTemp);
     formUserInputs -> addRow(buttonHeaterTriggerTemp, heaterTriggerTemp);
     formUserInputs -> addRow(buttonLightLevelTrigger, lightLevelTrigger);
+    formUserInputs -> addRow(buttonSoilMoistTrigger, soilMoistureTrigger);
     formUserInputs -> addRow(buttonc, COM);
     formUserInputs -> addRow(labelInfo, info);
 
@@ -331,6 +336,42 @@ void Dialog :: pushHeaterTrigger()
     }
 }
 
+void Dialog :: pushSoilMoistTrigger()
+{
+    bool check;
+    soilMoistTrigger = soilMoistureTrigger->text();
+    int tN = soilMoistTrigger.toInt(&check);
+    if(!check)
+    {
+        tN = 0;
+        qDebug() << "Please enther a nummber";
+    }
+    if(tN > 100)
+    {
+        tN = 100;
+        qDebug() << "Number is above 100, automatically set to 100";
+    }
+    if(tN < 0)
+    {
+        tN = 0;
+        qDebug() << "Number is below 0, automatically set to 0";
+    }
+    soilMoistTrigger = QString("%1").arg(tN);
+
+    updateSoilMoistureTrigger();
+
+    if(serial->isOpen())
+    {
+        QByteArray data;
+        data.append('s'); //"l"
+        data.append(soilMoistTrigger.toStdString());
+        data.append('\n'); //"l...\n"
+
+        serial->write(data);
+        serial->flush();
+    }
+}
+
 void Dialog :: pushLightTrigger()
 {
     bool check;
@@ -423,6 +464,13 @@ void Dialog :: updateHeaterTrigger()
              << heaterTriggerTemp->text() << "]";
 }
 
+void Dialog :: updateSoilMoistureTrigger()
+{
+    soilMoistureTrigger -> setText(QString("%1").arg(soilMoistTrigger));
+    qDebug() << "Soil Moisture Trigger updated: ["
+             << soilMoistureTrigger->text() << "]";
+}
+
 void Dialog :: updateLightTrigger()
 {
     lightLevelTrigger -> setText(QString("%1").arg(lightTrigger));
@@ -476,7 +524,8 @@ void Dialog :: serialConnect(void)
 
         heaterTrigger = QString("25");
         fanTrigger = QString("40");
-        lightTrigger = QString("0");
+        soilMoistTrigger = QString("50");
+        lightTrigger = QString("50");
 
         updateActuators();
         updateTemperature();
@@ -485,6 +534,7 @@ void Dialog :: serialConnect(void)
         updateLight();
         updateFanTrigger();
         updateHeaterTrigger();
+        updateSoilMoistureTrigger();
         updateLightTrigger();
     }
 }
@@ -562,6 +612,11 @@ void Dialog :: serialRead(void)
         qDebug() << "Light Trigger updated: ["
                  << lightLevelTrigger->text() << "]";
         break;
+    case 'm':
+        rxbuffer[i] = '\0';
+        soilMoistTrigger = rxbuffer.constData()+1;
+        qDebug() << "Soil Moist Trigger updated: ["
+                 << soilMoistureTrigger->text() << "]";
 
     default:
         info -> setText(tr("Problem with identifying the text"));

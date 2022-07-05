@@ -53,6 +53,7 @@ private slots:
 
      void pushFanTrigger();
      void pushHeaterTrigger();
+     void pushSoilMoistTrigger();
      void pushLightTrigger();
 
      void deleteWidget();
@@ -69,6 +70,7 @@ private slots:
      void updateLight();
      void updateFanTrigger();
      void updateHeaterTrigger();
+     void updateSoilMoistureTrigger();
      void updateLightTrigger();
 
      void serialConnect();
@@ -88,6 +90,7 @@ private:
 
     QString fanTrigger = "Nan";
     QString heaterTrigger = "Nan";
+    QString soilMoistTrigger = "Nan";
     QString lightTrigger = "Nan";
 
     QString Sentence[8];
@@ -112,6 +115,7 @@ private:
 
     QLineEdit *fanTriggerTemp;
     QLineEdit *heaterTriggerTemp;
+    QLineEdit *soilMoistureTrigger;
     QLineEdit *lightLevelTrigger;
 
     QLineEdit *COM;
