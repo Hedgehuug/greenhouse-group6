@@ -152,8 +152,8 @@ void Dialog :: createUserInputs()
 
     QPushButton *buttonFanTriggerTemp = new QPushButton(tr("Fan trigger temperature"));
     QPushButton *buttonHeaterTriggerTemp = new QPushButton(tr("Heater trigger temperature"));
-    QPushButton *buttonSoilMoistTrigger = new QPushButton(tr("Moisture trigger temperature"));
-    QPushButton *buttonLightLevelTrigger = new QPushButton(tr("Light %Level trigger"));
+    QPushButton *buttonSoilMoistTrigger = new QPushButton(tr("Moisture %level trigger"));
+    QPushButton *buttonLightLevelTrigger = new QPushButton(tr("Light %level trigger"));
 
     fanTriggerTemp = new QLineEdit;
     heaterTriggerTemp = new QLineEdit;
@@ -482,7 +482,7 @@ void Dialog :: serialConnect(void)
 {
     // Set serial port parameters
     serial->setPortName(COM->text());
-    serial->setBaudRate(QSerialPort::Baud115200);
+    serial->setBaudRate(QSerialPort::Baud9600);
     serial->setDataBits(QSerialPort::Data8);
     serial->setParity(QSerialPort::NoParity);
     serial->setStopBits(QSerialPort::OneStop);
@@ -522,10 +522,10 @@ void Dialog :: serialConnect(void)
         soilMoist = QString("0");
         lightLevel = QString("0");
 
-        heaterTrigger = QString("25");
-        fanTrigger = QString("40");
-        soilMoistTrigger = QString("50");
-        lightTrigger = QString("50");
+        heaterTrigger = QString("22");
+        fanTrigger = QString("29");
+        soilMoistTrigger = QString("20");
+        lightTrigger = QString("10");
 
         updateActuators();
         updateTemperature();
