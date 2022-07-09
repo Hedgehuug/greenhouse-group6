@@ -363,7 +363,7 @@ void Dialog :: pushSoilMoistTrigger()
     if(serial->isOpen())
     {
         QByteArray data;
-        data.append('s'); //"l"
+        data.append('m'); //"m"
         data.append(soilMoistTrigger.toStdString());
         data.append('\n'); //"l...\n"
 
