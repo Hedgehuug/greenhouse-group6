@@ -1,6 +1,6 @@
 Dependencies for Project 'greenhouse', Target 'greenhouse': (DO NOT MODIFY !)
 CompilerVersion: 6160000::V6.16::ARMCLANG
-F (.\main.c)(0x62C43F42)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/main.o -MD)
+F (.\main.c)(0x62C6D28C)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/main.o -MD)
 I (controlHeader.h)(0x62C2EE27)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x60356A44)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x60356A40)
@@ -13,7 +13,7 @@ I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Incl
 I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x62C2EE27)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x60356A3A)
 I (Lights\lights.h)(0x62C2EE27)
-I (SoilM\sensor.h)(0x62C4212E)
+I (SoilM\sensor.h)(0x62C6CC43)
 I (Temp\DHT11.h)(0x62C2EE27)
 I (Temp\..\tpm1\TPM0.h)(0x62C2EE27)
 I (Temp\..\uart1\uart1.h)(0x62C2EE29)
@@ -32,7 +32,7 @@ F (.\flags.c)(0x62C2EE27)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m
 F (.\controlHeader.h)(0x62C2EE27)()
 F (.\flags.h)(0x62C2EE27)()
 F (.\SoilM\sensor.c)(0x62C42132)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/sensor.o -MD)
-I (SoilM\sensor.h)(0x62C4212E)
+I (SoilM\sensor.h)(0x62C6CC43)
 I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\Keil\Kinetis_KLxx_DFP\1.15.0\Device\Include\MKL25Z4.h)(0x585BDE7A)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdint.h)(0x60356A40)
 I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\core_cm0plus.h)(0x60D44B52)
@@ -40,7 +40,7 @@ I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Incl
 I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_compiler.h)(0x60D44B52)
 I (C:\Users\Adil Qachach\AppData\Local\Arm\Packs\ARM\CMSIS\5.8.0\CMSIS\Core\Include\cmsis_armclang.h)(0x60D44B52)
 I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x62C2EE27)
-F (.\SoilM\sensor.h)(0x62C4212E)()
+F (.\SoilM\sensor.h)(0x62C6CC43)()
 F (.\Temp\DHT11.c)(0x62C2EE27)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/dht11.o -MD)
 I (Temp\DHT11.h)(0x62C2EE27)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x60356A3A)
@@ -114,7 +114,7 @@ I (RTE\Device\MKL25Z128xxx4\system_MKL25Z4.h)(0x62C2EE27)
 I (uart1\..\queue\queue.h)(0x62C2EE27)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdbool.h)(0x60356A3A)
 F (.\uart1\uart1.h)(0x62C2EE29)()
-F (.\LCD\LCD.c)(0x62C427B5)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/lcd.o -MD)
+F (.\LCD\LCD.c)(0x62C6CCBF)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/lcd.o -MD)
 I (LCD\LCD.h)(0x62C427D0)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x60356A44)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x60356A40)
@@ -133,7 +133,7 @@ I (LCD\..\Temp\..\uart1\..\queue\queue.h)(0x62C2EE27)
 I (LCD\..\Driver\driver.h)(0x62C2EE27)
 F (.\LCD\LCD.h)(0x62C427D0)()
 F (.\i2c\i2c.h)(0x62C2EE27)()
-F (.\i2c\i2c.c)(0x62C2EE27)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/i2c.o -MD)
+F (.\i2c\i2c.c)(0x62C6CAFF)(-xc -std=c11 --target=arm-arm-none-eabi -mcpu=cortex-m0plus -c-fno-rtti -funsigned-char -fshort-enums -fshort-wchar-D__EVAL -D__MICROLIB -gdwarf-4 -O3 -ffunction-sections -Wno-packed -Wno-missing-variable-declarations -Wno-missing-prototypes -Wno-missing-noreturn -Wno-sign-conversion -Wno-nonportable-include-path -Wno-reserved-id-macro -Wno-unused-macros -Wno-documentation-unknown-command -Wno-documentation -Wno-license-management -Wno-parentheses-equality -I./RTE/Device/MKL25Z128xxx4-I./RTE/_greenhouse-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/ARM/CMSIS/5.8.0/CMSIS/Core/Include"-I"C:/Users/Adil Qachach/AppData/Local/Arm/Packs/Keil/Kinetis_KLxx_DFP/1.15.0/Device/Include"-D__UVISION_VERSION="536" -D_RTE_ -DMKL25Z128xxx4 -D_RTE_ -DCLOCK_SETUP="1"-o ./objects/i2c.o -MD)
 I (i2c\i2c.h)(0x62C2EE27)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdio.h)(0x60356A44)
 I (C:\Keil_v5\ARM\ARMCLANG\include\stdlib.h)(0x60356A40)

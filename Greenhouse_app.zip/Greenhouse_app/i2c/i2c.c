@@ -363,7 +363,7 @@ static void delay(uint32_t d)
 
     volatile uint32_t t;
 
-    for(t=4000*d; t>0; t--)
+    for(t=400*d; t>0; t--)
     {
         __asm("nop");
         __asm("nop");

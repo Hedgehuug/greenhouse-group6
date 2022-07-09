@@ -67,7 +67,7 @@ void mainScreen(struct DHT x, int percent, char str[]){
 	
 	char str1[16];
 	
-	sprintf(str1,"H %d/T %dC/S %d", x.humidity, x.temperature, percent);
+	sprintf(str1,"H %d/T %dC/S %2d", x.humidity, x.temperature, percent);
 		
 	PCF8574T_displayString(str1, 1);
 	

@@ -24,7 +24,7 @@ int soil_Perc;              // Soil Moisture Level in percentage
 int heaterTemp = 20;
 int fanTemp = 29;
 int soilMoistTrigger = 20;
-int lightTrigger = 55000;
+int lightTrigger = 59000;
 char localReceive[32];
 
 //int dataBits[40];
@@ -120,7 +120,7 @@ int main(void)
 			}
 			
 			int tempLight = atoi(localReceive);
-			lightTrigger = (tempLight*0xFFFF)/100.0;
+			lightTrigger = 0xFFFF-(tempLight*0xFFFF)/100.0;
 				break;
 			case 't':
 				for (int i = 1; receiveString[i] != '\n'; i++)
@@ -164,7 +164,7 @@ int main(void)
 						
 		
 		LDR_value = checkAnalog(0);
-				sprintf((char *)str,"l%d\n", LDR_value);
+				sprintf((char *)str,"l%d\n", 100-(int)((LDR_value*100.0)/0xFFFF));
 		
 		//SoilMoisture = 0xFFFF - checkAnalog(8);
 		soil_Perc = soil_Conv();
@@ -293,6 +293,7 @@ int main(void)
 void displayLCD(int val, int val2){
 	char flagDisplay[48];
 	sprintf(flagDisplay,"flags: %s",flagString);
+	
 	if(y == 0){
 		minX = 0;
 		maxX = 0;
@@ -326,7 +327,7 @@ static void delay_m(uint32_t d)
 
     volatile uint32_t t;
 
-    for(t=4000*d; t>0; t--)
+    for(t=(4000*d); t>0; t--)
     {
         __asm("nop");
         __asm("nop");
